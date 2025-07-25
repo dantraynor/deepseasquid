@@ -67,28 +67,6 @@ python -m http.server 8000  # For local server
 
 ## 🛠️ Technical Details
 
-### Built With:
-- **HTML5** - Semantic structure
-- **CSS3** - Advanced animations, gradients, backdrop filters
-- **Vanilla JavaScript** - Interactive elements, no dependencies
-- **Google Fonts** - Orbitron, JetBrains Mono, Inter
-
-### Features:
-- ✅ **Responsive design** - Works on desktop, tablet, mobile
-- ✅ **Cross-browser compatible** - Chrome, Firefox, Safari, Edge
-- ✅ **No dependencies** - Pure HTML/CSS/JS
-- ✅ **Lightweight** - Fast loading times
-- ✅ **Offline capable** - Download and run locally
-- ✅ **Professional animations** - Smooth transitions and effects
-
-### Browser Compatibility:
-| Browser | Support |
-|---------|---------|
-| Chrome 90+ | ✅ Full support |
-| Firefox 88+ | ✅ Full support |
-| Safari 14+ | ✅ Full support |
-| Edge 90+ | ✅ Full support |
-
 ## 📁 File Structure
 
 ```
@@ -129,37 +107,3 @@ deep-sea-discovery-presentation/
 - Easing functions: Change `ease-in-out` to `linear`, `ease`, etc.
 - Disable animations: Add `prefers-reduced-motion` media query
 
-## 📊 Performance
-
-- **Load time:** < 2 seconds on broadband
-- **File size:** < 100KB total
-- **Animations:** 60fps on modern devices
-- **Memory usage:** < 50MB
-
-## 🤝 Contributing
-
-Feel free to fork this repo and adapt it for your own presentations!
-
-### Ideas for Enhancement:
-- [ ] Add more ocean zones
-- [ ] Include actual squid footage embed
-- [ ] Create sound effects toggle
-- [ ] Add presenter notes overlay
-- [ ] Mobile swipe navigation
-
-## 📄 License
-
-MIT License - Feel free to use for educational presentations!
-
-## 🏆 Credits
-
-- **Concept:** Current events presentation on colossal squid discovery
-- **Design:** Modern submarine/ROV interface aesthetic
-- **Fonts:** Google Fonts (Orbitron, JetBrains Mono, Inter)
-- **Inspiration:** Deep sea exploration documentaries
-
----
-
-### 🌟 Star this repo if it helped with your presentation!
-
-**Built for students who want to create presentations that actually engage their audience.** 🎓
