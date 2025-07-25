@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Abyss Awaits - Ocean Descent</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400&family=Inter:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(180deg, 
+                #87CEEB 0%,     /* Surface - light blue */
+                #4682B4 15%,    /* Sunlight zone */
+                #2E4C8B 30%,    /* Twilight zone */
+                #1A237E 50%,    /* Midnight zone */
+                #0D1421 70%,    /* Abyssal zone */
+                #000000 100%    /* Hadal zone */
+            );
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+        }
+        
+        /* Animated light rays from surface */
+        .light-rays {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: 
+                linear-gradient(165deg, transparent 30%, rgba(255,255,255,0.1) 35%, transparent 40%),
+                linear-gradient(155deg, transparent 20%, rgba(255,255,255,0.08) 25%, transparent 30%),
+                linear-gradient(175deg, transparent 40%, rgba(255,255,255,0.06) 45%, transparent 50%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; transform: translateX(-10px); }
+            50% { opacity: 0.7; transform: translateX(10px); }
+        }
+        
+        /* Depth gauge on left side */
+        .depth-gauge {
+            position: absolute;
+            left: 3rem;
+            top: 10%;
+            height: 80%;
+            width: 80px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00E5FF;
+            border-radius: 40px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .depth-title {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00E5FF;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            transform: rotate(-90deg);
+            letter-spacing: 2px;
+        }
+        
+        .depth-scale {
+            flex: 1;
+            width: 100%;
+            position: relative;
+            margin: 1rem 0;
+        }
+        
+        .depth-marker {
+            position: absolute;
+            right: 10px;
+            width: 30px;
+            height: 2px;
+            background: #00E5FF;
+            opacity: 0.6;
+        }
+        
+        .depth-label {
+            position: absolute;
+            right: 45px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #E3F2FD;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            transform: translateY(-50%);
+        }
+        
+        /* Current depth indicator */
+        .depth-indicator {
+            position: absolute;
+            left: 5px;
+            width: 70px;
+            height: 4px;
+            background: #FF4444;
+            border-radius: 2px;
+            transition: top 3s ease-in-out;
+            box-shadow: 0 0 10px #FF4444;
+        }
+        
+        /* Ocean zones with info cards */
+        .ocean-zones {
+            position: absolute;
+            right: 5%;
+            top: 10%;
+            width: 350px;
+            height: 80%;
+        }
+        
+        .zone-card {
+            position: absolute;
+            width: 100%;
+            background: rgba(26, 35, 126, 0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .zone-card.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .zone-card:hover {
+            background: rgba(26, 35, 126, 0.4);
+            border-color: #00E5FF;
+            transform: translateX(-10px) scale(1.02);
+        }
+        
+        .zone-name {
+            font-family: 'Orbitron', sans-serif;
+            color: #00E5FF;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .zone-depth {
+            font-family: 'JetBrains Mono', monospace;
+            color: #81C784;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .zone-description {
+            color: #E3F2FD;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+        
+        .zone-creatures {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .creature-tag {
+            background: rgba(0, 229, 255, 0.2);
+            color: #00E5FF;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+        }
+        
+        /* Main title overlay */
+        .title-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #E3F2FD;
+            text-shadow: 0 0 30px #00E5FF;
+            margin-bottom: 1rem;
+            animation: titlePulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes titlePulse {
+            0%, 100% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            color: #81C784;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        /* Mystery stat in bottom corner */
+        .mystery-stat {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem 3rem;
+            border-radius: 10px;
+            border: 1px solid #FF4444;
+        }
+        
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #FF4444;
+            font-weight: 900;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            color: #E3F2FD;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        /* Floating particles for atmosphere */
+        .marine-snow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .snow-particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: snowfall 15s linear infinite;
+        }
+        
+        .snow-particle:nth-child(1) { width: 2px; height: 2px; left: 10%; animation-delay: 0s; }
+        .snow-particle:nth-child(2) { width: 3px; height: 3px; left: 25%; animation-delay: 3s; }
+        .snow-particle:nth-child(3) { width: 1px; height: 1px; left: 40%; animation-delay: 6s; }
+        .snow-particle:nth-child(4) { width: 2px; height: 2px; left: 55%; animation-delay: 9s; }
+        .snow-particle:nth-child(5) { width: 3px; height: 3px; left: 70%; animation-delay: 12s; }
+        .snow-particle:nth-child(6) { width: 1px; height: 1px; left: 85%; animation-delay: 2s; }
+        
+        @keyframes snowfall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Auto-animation sequence */
+        .auto-descend {
+            animation: autoScroll 20s linear infinite;
+        }
+        
+        @keyframes autoScroll {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 0% 100%; }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .ocean-zones { width: 300px; }
+            .depth-gauge { left: 2rem; }
+            .main-title { font-size: 3rem; }
+        }
+        
+        @media (max-width: 768px) {
+            .ocean-zones { 
+                right: 2%; 
+                width: 250px; 
+                top: 15%;
+                height: 70%;
+            }
+            .depth-gauge { 
+                left: 1rem; 
+                width: 60px;
+                height: 70%;
+            }
+            .main-title { font-size: 2.5rem; }
+            .subtitle { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated light rays from surface -->
+    <div class="light-rays"></div>
+    
+    <!-- Marine snow particles -->
+    <div class="marine-snow">
+        <div class="snow-particle"></div>
+        <div class="snow-particle"></div>
+        <div class="snow-particle"></div>
+        <div class="snow-particle"></div>
+        <div class="snow-particle"></div>
+        <div class="snow-particle"></div>
+    </div>
+    
+    <!-- Depth gauge -->
+    <div class="depth-gauge">
+        <div class="depth-title">DEPTH</div>
+        <div class="depth-scale">
+            <!-- Depth markers -->
+            <div class="depth-marker" style="top: 0%;"></div>
+            <div class="depth-label" style="top: 0%;">0m</div>
+            
+            <div class="depth-marker" style="top: 15%;"></div>
+            <div class="depth-label" style="top: 15%;">200m</div>
+            
+            <div class="depth-marker" style="top: 30%;"></div>
+            <div class="depth-label" style="top: 30%;">1,000m</div>
+            
+            <div class="depth-marker" style="top: 50%;"></div>
+            <div class="depth-label" style="top: 50%;">4,000m</div>
+            
+            <div class="depth-marker" style="top: 70%;"></div>
+            <div class="depth-label" style="top: 70%;">6,000m</div>
+            
+            <div class="depth-marker" style="top: 100%;"></div>
+            <div class="depth-label" style="top: 100%;">11,000m</div>
+            
+            <!-- Current position indicator -->
+            <div class="depth-indicator" style="top: 35%;" id="depthIndicator"></div>
+        </div>
+    </div>
+    
+    <!-- Ocean zones information -->
+    <div class="ocean-zones">
+        <!-- Sunlight Zone -->
+        <div class="zone-card active" style="top: 0%;" id="zone1">
+            <div class="zone-name">Sunlight Zone</div>
+            <div class="zone-depth">0 - 200m deep</div>
+            <div class="zone-description">
+                Where photosynthesis happens. Warm, bright waters teeming with life.
+            </div>
+            <div class="zone-creatures">
+                <span class="creature-tag">Dolphins</span>
+                <span class="creature-tag">Tuna</span>
+                <span class="creature-tag">Jellyfish</span>
+            </div>
+        </div>
+        
+        <!-- Twilight Zone -->
+        <div class="zone-card" style="top: 20%;" id="zone2">
+            <div class="zone-name">Twilight Zone</div>
+            <div class="zone-depth">200 - 1,000m deep</div>
+            <div class="zone-description">
+                Dim light fades to darkness. Many creatures migrate here daily.
+            </div>
+            <div class="zone-creatures">
+                <span class="creature-tag">Lanternfish</span>
+                <span class="creature-tag">Squid</span>
+                <span class="creature-tag">Vampire Squid</span>
+            </div>
+        </div>
+        
+        <!-- Midnight Zone -->
+        <div class="zone-card" style="top: 40%;" id="zone3">
+            <div class="zone-name">Midnight Zone</div>
+            <div class="zone-depth">1,000 - 4,000m deep</div>
+            <div class="zone-description">
+                Perpetual darkness. Bioluminescence is the only light source.
+            </div>
+            <div class="zone-creatures">
+                <span class="creature-tag">Anglerfish</span>
+                <span class="creature-tag">Giant Isopods</span>
+                <span class="creature-tag">Dumbo Octopus</span>
+            </div>
+        </div>
+        
+        <!-- Abyssal Zone -->
+        <div class="zone-card" style="top: 60%;" id="zone4">
+            <div class="zone-name">Abyssal Zone</div>
+            <div class="zone-depth">4,000 - 6,000m deep</div>
+            <div class="zone-description">
+                Near-freezing temperatures. Sparse life adapted to extreme pressure.
+            </div>
+            <div class="zone-creatures">
+                <span class="creature-tag">Sea Cucumbers</span>
+                <span class="creature-tag">Deep-sea Corals</span>
+            </div>
+        </div>
+        
+        <!-- Hadal Zone -->
+        <div class="zone-card" style="top: 80%;" id="zone5">
+            <div class="zone-name">Hadal Zone</div>
+            <div class="zone-depth">6,000+ m deep</div>
+            <div class="zone-description">
+                The deepest trenches. Life exists under crushing pressure.
+            </div>
+            <div class="zone-creatures">
+                <span class="creature-tag">Snailfish</span>
+                <span class="creature-tag">Amphipods</span>
+                <span class="creature-tag">???</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main title overlay -->
+    <div class="title-overlay">
+        <h1 class="main-title">THE ABYSS AWAITS</h1>
+        <p class="subtitle">95% UNEXPLORED</p>
+    </div>
+    
+    <!-- Mystery statistic -->
+    <div class="mystery-stat">
+        <div class="stat-number">600m</div>
+        <div class="stat-label">WHERE WE FOUND IT</div>
+    </div>
+    
+    <script>
+        // Auto-animate zones appearing
+        let currentZone = 1;
+        const maxZones = 5;
+        
+        function showNextZone() {
+            // Hide current zone
+            document.getElementById(`zone${currentZone}`).classList.remove('active');
+            
+            // Move to next zone
+            currentZone = currentZone % maxZones + 1;
+            
+            // Show next zone
+            setTimeout(() => {
+                document.getElementById(`zone${currentZone}`).classList.add('active');
+                
+                // Move depth indicator
+                const depthPositions = [5, 20, 35, 55, 75];
+                document.getElementById('depthIndicator').style.top = `${depthPositions[currentZone - 1]}%`;
+            }, 200);
+        }
+        
+        // Auto-cycle through zones every 4 seconds
+        setInterval(showNextZone, 4000);
+        
+        // Click to manually advance
+        document.addEventListener('click', showNextZone);
+    </script>
+</body>
+</html>
