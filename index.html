@@ -471,10 +471,30 @@
                     <div class="control-description">Share entire screen, open slides in separate tabs</div>
                 </div>
                 <div class="control-item">
-                    <div class="control-label">Backup Plan</div>
-                    <div class="control-description">Download repo as ZIP for offline presentation</div>
+                    <div class="control-label">Local Server Required</div>
+                    <div class="control-description">Run: <code style="color: #00E5FF;">python3 -m http.server 8000</code> then open localhost:8000</div>
                 </div>
             </div>
+        </div>
+        
+        <div class="troubleshooting" style="
+            background: rgba(255, 69, 0, 0.1);
+            border: 1px solid #FF4500;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        ">
+            <h3 style="color: #FF4500; margin-bottom: 15px;">⚠️ Links Not Working?</h3>
+            <p style="color: #E3F2FD; line-height: 1.6; margin-bottom: 10px;">
+                If clicking the slide links doesn't work, you need to serve the files via HTTP:
+            </p>
+            <ol style="color: #E3F2FD; line-height: 1.8; margin-left: 20px;">
+                <li><strong>Option 1:</strong> Use Python: <code style="color: #00E5FF; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">python3 -m http.server 8000</code></li>
+                <li><strong>Option 2:</strong> Use Live Server extension in VS Code</li>
+                <li><strong>Option 3:</strong> Open files individually by dragging them into browser</li>
+                <li><strong>GitHub Pages:</strong> Deploy to GitHub Pages for permanent hosting</li>
+            </ol>
         </div>
         
         <div class="footer">
@@ -489,5 +509,56 @@
             </p>
         </div>
     </div>
+    
+    <script>
+        // Check if page is served via file:// protocol and show warning
+        if (window.location.protocol === 'file:') {
+            // Create warning banner
+            const warning = document.createElement('div');
+            warning.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(45deg, #FF4500, #FF6B35);
+                color: white;
+                padding: 15px;
+                text-align: center;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 14px;
+                z-index: 9999;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+                animation: slideDown 0.5s ease-out;
+            `;
+            warning.innerHTML = `
+                <strong>⚠️ FILE PROTOCOL DETECTED</strong> - 
+                Links may not work properly. Please serve via HTTP: 
+                <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">python3 -m http.server 8000</code>
+                <button onclick="this.parentElement.style.display='none'" style="
+                    background: rgba(255,255,255,0.2);
+                    border: none;
+                    color: white;
+                    padding: 5px 10px;
+                    margin-left: 10px;
+                    border-radius: 3px;
+                    cursor: pointer;
+                ">✕ Close</button>
+            `;
+            
+            // Add animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideDown {
+                    from { transform: translateY(-100%); }
+                    to { transform: translateY(0); }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(warning);
+            
+            // Push content down
+            document.body.style.paddingTop = '70px';
+        }
+    </script>
 </body>
 </html>
