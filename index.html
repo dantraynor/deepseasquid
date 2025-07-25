@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Sea Discovery - Colossal Squid Presentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0A0E27 0%, #1A237E 50%, #0D1421 100%);
+            min-height: 100vh;
+            font-family: 'Orbitron', sans-serif;
+            color: #E3F2FD;
+            overflow-x: hidden;
+        }
+        
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: #00E5FF;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 5px; height: 5px; left: 40%; animation-delay: 1s; }
+        .particle:nth-child(5) { width: 4px; height: 4px; left: 50%; animation-delay: 3s; }
+        .particle:nth-child(6) { width: 7px; height: 7px; left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { width: 3px; height: 3px; left: 70%; animation-delay: 6s; }
+        .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(9) { width: 4px; height: 4px; left: 90%; animation-delay: 4s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+            90% { opacity: 0.1; }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 60px;
+        }
+        
+        .main-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px #00E5FF;
+            letter-spacing: 4px;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 30px #00E5FF, 0 0 40px #00E5FF; }
+            to { text-shadow: 0 0 20px #00E5FF, 0 0 30px #00E5FF, 0 0 40px #00E5FF; }
+        }
+        
+        .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: #81C784;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .event-info {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00E5FF;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .slides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .slide-card {
+            background: rgba(26, 35, 126, 0.2);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(0, 229, 255, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .slide-card:hover::before {
+            left: 100%;
+        }
+        
+        .slide-card:hover {
+            background: rgba(26, 35, 126, 0.4);
+            border-color: #00E5FF;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 229, 255, 0.2);
+        }
+        
+        .slide-number {
+            font-family: 'JetBrains Mono', monospace;
+            color: #FF4444;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .slide-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00E5FF;
+            margin-bottom: 15px;
+        }
+        
+        .slide-description {
+            color: #E3F2FD;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .slide-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #00E5FF, #0091EA);
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        
+        .slide-link:hover {
+            background: linear-gradient(45deg, #40C4FF, #00E5FF);
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 229, 255, 0.3);
+        }
+        
+        .presentation-controls {
+            background: rgba(26, 35, 126, 0.3);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .controls-title {
+            font-size: 1.4rem;
+            color: #00E5FF;
+            margin-bottom: 20px;
+        }
+        
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .control-item {
+            text-align: left;
+        }
+        
+        .control-label {
+            font-family: 'JetBrains Mono', monospace;
+            color: #81C784;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .control-description {
+            color: #E3F2FD;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 229, 255, 0.2);
+        }
+        
+        .github-link {
+            color: #81C784;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .github-link:hover {
+            color: #00E5FF;
+        }
+        
+        .tech-info {
+            margin-top: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.5rem; }
+            .slides-grid { grid-template-columns: 1fr; }
+            .controls-grid { grid-template-columns: 1fr; }
+            .container { padding: 20px 15px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">DEEP SEA DISCOVERY</h1>
+            <p class="subtitle">Interactive Presentation</p>
+            <p class="event-info">Colossal Squid: First Live Footage • March 9, 2025</p>
+        </div>
+        
+        <div class="slides-grid">
+            <div class="slide-card">
+                <div class="slide-number">SLIDE 01</div>
+                <h2 class="slide-title">🔒 CLASSIFIED INTRO</h2>
+                <p class="slide-description">
+                    Dramatic opening with classified document styling. Sets the scene for the groundbreaking discovery with animated sonar effects and mission parameters.
+                </p>
+                <a href="figma_intro_slide.html" class="slide-link" target="_blank">ENTER BRIEFING →</a>
+            </div>
+            
+            <div class="slide-card">
+                <div class="slide-number">SLIDE 02</div>
+                <h2 class="slide-title">🌊 OCEAN DESCENT</h2>
+                <p class="slide-description">
+                    Interactive journey through ocean zones with animated depth gauge. Click to explore each zone and discover where the colossal squid was found.
+                </p>
+                <a href="figma_descent_slide.html" class="slide-link" target="_blank">BEGIN DESCENT →</a>
+            </div>
+        </div>
+        
+        <div class="presentation-controls">
+            <h3 class="controls-title">📋 Presentation Instructions</h3>
+            <div class="controls-grid">
+                <div class="control-item">
+                    <div class="control-label">Full-Screen Mode</div>
+                    <div class="control-description">Press F11 on each slide for cinematic presentation</div>
+                </div>
+                <div class="control-item">
+                    <div class="control-label">Navigation</div>
+                    <div class="control-description">Click anywhere on descent slide to advance through zones</div>
+                </div>
+                <div class="control-item">
+                    <div class="control-label">For Zoom</div>
+                    <div class="control-description">Share entire screen, open slides in separate tabs</div>
+                </div>
+                <div class="control-item">
+                    <div class="control-label">Backup Plan</div>
+                    <div class="control-description">Download repo as ZIP for offline presentation</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>
+                <a href="https://github.com/yourusername/deep-sea-discovery-presentation" class="github-link">
+                    📂 View on GitHub
+                </a>
+            </p>
+            <p class="tech-info">
+                Built with HTML5, CSS3, JavaScript • No frameworks required<br>
+                Optimized for Chrome/Firefox • Works on any device
+            </p>
+        </div>
+    </div>
+</body>
+</html>
