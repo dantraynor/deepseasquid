@@ -1,483 +1,586 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Sea Discovery - Colossal Squid Presentation</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(13, 20, 33, 0.9) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(26, 35, 126, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 40% 80%, rgba(10, 14, 39, 0.8) 0%, transparent 50%),
-                linear-gradient(180deg, #000510 0%, #0A0E27 30%, #1A237E 70%, #0D1421 100%);
-            min-height: 100vh;
-            font-family: 'Orbitron', sans-serif;
-            color: #E3F2FD;
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        /* Animated background particles */
-        .particles {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, #00E5FF 0%, rgba(0, 229, 255, 0.3) 50%, transparent 100%);
-            border-radius: 50%;
-            opacity: 0.05;
-            animation: float 12s ease-in-out infinite;
-            filter: blur(0.5px);
-        }
-        
-        .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-delay: 2s; }
-        .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-delay: 4s; }
-        .particle:nth-child(4) { width: 5px; height: 5px; left: 40%; animation-delay: 1s; }
-        .particle:nth-child(5) { width: 4px; height: 4px; left: 50%; animation-delay: 3s; }
-        .particle:nth-child(6) { width: 7px; height: 7px; left: 60%; animation-delay: 5s; }
-        .particle:nth-child(7) { width: 3px; height: 3px; left: 70%; animation-delay: 6s; }
-        .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-delay: 2s; }
-        .particle:nth-child(9) { width: 4px; height: 4px; left: 90%; animation-delay: 4s; }
-        
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(100vh) rotate(0deg) scale(0.8); 
-                opacity: 0; 
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Deep Sea Discovery - Colossal Squid Presentation</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400&display=swap');
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
-            5% { opacity: 0.02; }
-            50% { 
-                opacity: 0.08; 
-                transform: translateY(50vh) rotate(180deg) scale(1.2);
+
+            body {
+                background:
+                    radial-gradient(ellipse at 20% 50%, rgba(13, 20, 33, 0.9) 0%, transparent 50%),
+                    radial-gradient(ellipse at 80% 20%, rgba(26, 35, 126, 0.3) 0%, transparent 50%),
+                    radial-gradient(ellipse at 40% 80%, rgba(10, 14, 39, 0.8) 0%, transparent 50%),
+                    linear-gradient(180deg, #000510 0%, #0A0E27 30%, #1A237E 70%, #0D1421 100%);
+                min-height: 100vh;
+                font-family: 'Orbitron', sans-serif;
+                color: #E3F2FD;
+                overflow-x: hidden;
+                position: relative;
             }
-            95% { opacity: 0.02; }
-        }
-        
-        .container {
-            position: relative;
-            z-index: 10;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        
-        .header {
-            margin-bottom: 60px;
-        }
-        
-        .main-title {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            text-shadow: 
-                0 0 20px rgba(0, 229, 255, 0.4),
-                0 0 40px rgba(0, 229, 255, 0.2),
-                0 0 80px rgba(0, 229, 255, 0.1);
-            letter-spacing: 6px;
-            animation: mysteriousGlow 6s ease-in-out infinite;
-            opacity: 0.9;
-        }
-        
-        @keyframes mysteriousGlow {
-            0%, 100% { 
-                text-shadow: 
-                    0 0 15px rgba(0, 229, 255, 0.3),
-                    0 0 30px rgba(0, 229, 255, 0.2),
-                    0 0 60px rgba(0, 229, 255, 0.1);
+
+            /* Animated background particles */
+            .particles {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            .particle {
+                position: absolute;
+                background: radial-gradient(circle, #00E5FF 0%, rgba(0, 229, 255, 0.3) 50%, transparent 100%);
+                border-radius: 50%;
+                opacity: 0.05;
+                animation: float 12s ease-in-out infinite;
+                filter: blur(0.5px);
+            }
+
+            .particle:nth-child(1) {
+                width: 4px;
+                height: 4px;
+                left: 10%;
+                animation-delay: 0s;
+            }
+
+            .particle:nth-child(2) {
+                width: 6px;
+                height: 6px;
+                left: 20%;
+                animation-delay: 2s;
+            }
+
+            .particle:nth-child(3) {
+                width: 3px;
+                height: 3px;
+                left: 30%;
+                animation-delay: 4s;
+            }
+
+            .particle:nth-child(4) {
+                width: 5px;
+                height: 5px;
+                left: 40%;
+                animation-delay: 1s;
+            }
+
+            .particle:nth-child(5) {
+                width: 4px;
+                height: 4px;
+                left: 50%;
+                animation-delay: 3s;
+            }
+
+            .particle:nth-child(6) {
+                width: 7px;
+                height: 7px;
+                left: 60%;
+                animation-delay: 5s;
+            }
+
+            .particle:nth-child(7) {
+                width: 3px;
+                height: 3px;
+                left: 70%;
+                animation-delay: 6s;
+            }
+
+            .particle:nth-child(8) {
+                width: 5px;
+                height: 5px;
+                left: 80%;
+                animation-delay: 2s;
+            }
+
+            .particle:nth-child(9) {
+                width: 4px;
+                height: 4px;
+                left: 90%;
+                animation-delay: 4s;
+            }
+
+            @keyframes float {
+
+                0%,
+                100% {
+                    transform: translateY(100vh) rotate(0deg) scale(0.8);
+                    opacity: 0;
+                }
+
+                5% {
+                    opacity: 0.02;
+                }
+
+                50% {
+                    opacity: 0.08;
+                    transform: translateY(50vh) rotate(180deg) scale(1.2);
+                }
+
+                95% {
+                    opacity: 0.02;
+                }
+            }
+
+            .container {
+                position: relative;
+                z-index: 10;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 40px 20px;
+                text-align: center;
+            }
+
+            .header {
+                margin-bottom: 60px;
+            }
+
+            .main-title {
+                font-size: 4rem;
+                font-weight: 900;
+                margin-bottom: 20px;
+                text-shadow:
+                    0 0 20px rgba(0, 229, 255, 0.4),
+                    0 0 40px rgba(0, 229, 255, 0.2),
+                    0 0 80px rgba(0, 229, 255, 0.1);
+                letter-spacing: 6px;
+                animation: mysteriousGlow 6s ease-in-out infinite;
+                opacity: 0.9;
+            }
+
+            @keyframes mysteriousGlow {
+
+                0%,
+                100% {
+                    text-shadow:
+                        0 0 15px rgba(0, 229, 255, 0.3),
+                        0 0 30px rgba(0, 229, 255, 0.2),
+                        0 0 60px rgba(0, 229, 255, 0.1);
+                    opacity: 0.85;
+                }
+
+                50% {
+                    text-shadow:
+                        0 0 25px rgba(0, 229, 255, 0.5),
+                        0 0 50px rgba(0, 229, 255, 0.3),
+                        0 0 100px rgba(0, 229, 255, 0.15);
+                    opacity: 0.95;
+                }
+            }
+
+            .subtitle {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 1.2rem;
+                color: rgba(129, 199, 132, 0.7);
+                letter-spacing: 2px;
+                margin-bottom: 10px;
+                opacity: 0.8;
+                animation: subtleFlicker 4s ease-in-out infinite;
+            }
+
+            .event-info {
+                font-family: 'JetBrains Mono', monospace;
+                color: rgba(0, 229, 255, 0.6);
+                font-size: 0.9rem;
+                opacity: 0.7;
+                text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+            }
+
+            @keyframes subtleFlicker {
+
+                0%,
+                96%,
+                100% {
+                    opacity: 0.8;
+                }
+
+                98% {
+                    opacity: 0.6;
+                }
+            }
+
+            /* Mysterious fog overlay */
+            body::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background:
+                    radial-gradient(ellipse at 30% 40%, rgba(0, 229, 255, 0.03) 0%, transparent 50%),
+                    radial-gradient(ellipse at 70% 60%, rgba(13, 20, 33, 0.4) 0%, transparent 50%);
+                pointer-events: none;
+                z-index: 1;
+                animation: mysteriousFog 20s ease-in-out infinite;
+            }
+
+            @keyframes mysteriousFog {
+
+                0%,
+                100% {
+                    opacity: 0.3;
+                    transform: scale(1) rotate(0deg);
+                }
+
+                50% {
+                    opacity: 0.6;
+                    transform: scale(1.1) rotate(1deg);
+                }
+            }
+
+            .slides-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                gap: 30px;
+                margin-bottom: 60px;
+            }
+
+            .slide-card {
+                background:
+                    linear-gradient(135deg,
+                        rgba(26, 35, 126, 0.15) 0%,
+                        rgba(13, 20, 33, 0.25) 50%,
+                        rgba(10, 14, 39, 0.2) 100%);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(0, 229, 255, 0.2);
+                border-radius: 12px;
+                padding: 30px;
+                transition: all 0.4s ease;
+                position: relative;
+                overflow: hidden;
+                box-shadow:
+                    0 8px 32px rgba(0, 0, 0, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            }
+
+            .slide-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg,
+                        transparent,
+                        rgba(0, 229, 255, 0.05),
+                        rgba(0, 229, 255, 0.1),
+                        rgba(0, 229, 255, 0.05),
+                        transparent);
+                transition: left 0.8s ease;
+            }
+
+            .slide-card::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(circle at 50% 50%,
+                        rgba(0, 229, 255, 0.02) 0%,
+                        transparent 70%);
+                opacity: 0;
+                transition: opacity 0.4s ease;
+            }
+
+            .slide-card:hover::before {
+                left: 100%;
+            }
+
+            .slide-card:hover {
+                background:
+                    linear-gradient(135deg,
+                        rgba(26, 35, 126, 0.25) 0%,
+                        rgba(13, 20, 33, 0.35) 50%,
+                        rgba(10, 14, 39, 0.3) 100%);
+                border-color: rgba(0, 229, 255, 0.4);
+                transform: translateY(-8px) scale(1.02);
+                box-shadow:
+                    0 20px 40px rgba(0, 0, 0, 0.4),
+                    0 0 20px rgba(0, 229, 255, 0.15),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            }
+
+            .slide-card:hover::after {
+                opacity: 1;
+            }
+
+            .slide-number {
+                font-family: 'JetBrains Mono', monospace;
+                color: rgba(255, 68, 68, 0.7);
+                font-size: 0.8rem;
+                margin-bottom: 10px;
+                letter-spacing: 1px;
+                text-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+                opacity: 0.8;
+            }
+
+            .slide-title {
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: rgba(0, 229, 255, 0.9);
+                margin-bottom: 15px;
+                text-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+                letter-spacing: 1px;
+            }
+
+            .slide-description {
+                color: rgba(227, 242, 253, 0.8);
+                line-height: 1.6;
+                margin-bottom: 25px;
                 opacity: 0.85;
+                font-weight: 300;
             }
-            50% { 
-                text-shadow: 
-                    0 0 25px rgba(0, 229, 255, 0.5),
-                    0 0 50px rgba(0, 229, 255, 0.3),
-                    0 0 100px rgba(0, 229, 255, 0.15);
-                opacity: 0.95;
+
+            .slide-link {
+                display: inline-block;
+                background:
+                    linear-gradient(45deg,
+                        rgba(0, 229, 255, 0.2) 0%,
+                        rgba(0, 145, 234, 0.3) 100%);
+                color: rgba(0, 229, 255, 0.9);
+                border: 1px solid rgba(0, 229, 255, 0.4);
+                padding: 12px 30px;
+                border-radius: 25px;
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 0.9rem;
+                transition: all 0.4s ease;
+                letter-spacing: 1px;
+                backdrop-filter: blur(10px);
+                text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+                position: relative;
+                overflow: hidden;
             }
-        }
-        
-        .subtitle {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.2rem;
-            color: rgba(129, 199, 132, 0.7);
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            opacity: 0.8;
-            animation: subtleFlicker 4s ease-in-out infinite;
-        }
-        
-        .event-info {
-            font-family: 'JetBrains Mono', monospace;
-            color: rgba(0, 229, 255, 0.6);
-            font-size: 0.9rem;
-            opacity: 0.7;
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
-        }
-        
-        @keyframes subtleFlicker {
-            0%, 96%, 100% { opacity: 0.8; }
-            98% { opacity: 0.6; }
-        }
-        
-        /* Mysterious fog overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(ellipse at 30% 40%, rgba(0, 229, 255, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 60%, rgba(13, 20, 33, 0.4) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 1;
-            animation: mysteriousFog 20s ease-in-out infinite;
-        }
-        
-        @keyframes mysteriousFog {
-            0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
-            50% { opacity: 0.6; transform: scale(1.1) rotate(1deg); }
-        }
-        
-        .slides-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-        
-        .slide-card {
-            background: 
-                linear-gradient(135deg, 
-                    rgba(26, 35, 126, 0.15) 0%, 
-                    rgba(13, 20, 33, 0.25) 50%, 
-                    rgba(10, 14, 39, 0.2) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 229, 255, 0.2);
-            border-radius: 12px;
-            padding: 30px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-        
-        .slide-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(0, 229, 255, 0.05), 
-                rgba(0, 229, 255, 0.1), 
-                rgba(0, 229, 255, 0.05), 
-                transparent);
-            transition: left 0.8s ease;
-        }
-        
-        .slide-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, 
-                rgba(0, 229, 255, 0.02) 0%, 
-                transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        
-        .slide-card:hover::before {
-            left: 100%;
-        }
-        
-        .slide-card:hover {
-            background: 
-                linear-gradient(135deg, 
-                    rgba(26, 35, 126, 0.25) 0%, 
-                    rgba(13, 20, 33, 0.35) 50%, 
-                    rgba(10, 14, 39, 0.3) 100%);
-            border-color: rgba(0, 229, 255, 0.4);
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                0 0 20px rgba(0, 229, 255, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-        
-        .slide-card:hover::after {
-            opacity: 1;
-        }
-        
-        .slide-number {
-            font-family: 'JetBrains Mono', monospace;
-            color: rgba(255, 68, 68, 0.7);
-            font-size: 0.8rem;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
-            opacity: 0.8;
-        }
-        
-        .slide-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: rgba(0, 229, 255, 0.9);
-            margin-bottom: 15px;
-            text-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
-            letter-spacing: 1px;
-        }
-        
-        .slide-description {
-            color: rgba(227, 242, 253, 0.8);
-            line-height: 1.6;
-            margin-bottom: 25px;
-            opacity: 0.85;
-            font-weight: 300;
-        }
-        
-        .slide-link {
-            display: inline-block;
-            background: 
-                linear-gradient(45deg, 
-                    rgba(0, 229, 255, 0.2) 0%, 
-                    rgba(0, 145, 234, 0.3) 100%);
-            color: rgba(0, 229, 255, 0.9);
-            border: 1px solid rgba(0, 229, 255, 0.4);
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: all 0.4s ease;
-            letter-spacing: 1px;
-            backdrop-filter: blur(10px);
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .slide-link:hover {
-            background: 
-                linear-gradient(45deg, 
-                    rgba(64, 196, 255, 0.3) 0%, 
-                    rgba(0, 229, 255, 0.4) 100%);
-            color: rgba(255, 255, 255, 0.95);
-            border-color: rgba(0, 229, 255, 0.6);
-            transform: scale(1.03) translateY(-2px);
-            box-shadow: 
-                0 10px 25px rgba(0, 229, 255, 0.2),
-                0 0 20px rgba(0, 229, 255, 0.3);
-            text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
-        }
-        
-        .presentation-controls {
-            background: 
-                linear-gradient(135deg, 
-                    rgba(26, 35, 126, 0.15) 0%, 
-                    rgba(13, 20, 33, 0.25) 100%);
-            border: 1px solid rgba(0, 229, 255, 0.2);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(15px);
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-        
-        .controls-title {
-            font-size: 1.4rem;
-            color: rgba(0, 229, 255, 0.8);
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
-            opacity: 0.9;
-        }
-        
-        .controls-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .control-item {
-            text-align: left;
-        }
-        
-        .control-label {
-            font-family: 'JetBrains Mono', monospace;
-            color: rgba(129, 199, 132, 0.7);
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-            opacity: 0.8;
-        }
-        
-        .control-description {
-            color: rgba(227, 242, 253, 0.7);
-            font-size: 0.85rem;
-            opacity: 0.75;
-            font-weight: 300;
-        }
-        
-        .footer {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(0, 229, 255, 0.15);
-            opacity: 0.8;
-        }
-        
-        .github-link {
-            color: rgba(129, 199, 132, 0.6);
-            text-decoration: none;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-        
-        .github-link:hover {
-            color: rgba(0, 229, 255, 0.8);
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
-        }
-        
-        .tech-info {
-            margin-top: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            opacity: 0.5;
-            color: rgba(227, 242, 253, 0.6);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-title { font-size: 2.5rem; }
-            .slides-grid { grid-template-columns: 1fr; }
-            .controls-grid { grid-template-columns: 1fr; }
-            .container { padding: 20px 15px; }
-        }
-    </style>
-</head>
-<body>
-    <!-- Background particles -->
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
-    
-    <div class="container">
-        <div class="header">
-            <h1 class="main-title">DEEP SEA DISCOVERY</h1>
-            <p class="subtitle">Interactive Presentation</p>
-            <p class="event-info">Colossal Squid: First Live Footage • March 9, 2025</p>
+
+            .slide-link:hover {
+                background:
+                    linear-gradient(45deg,
+                        rgba(64, 196, 255, 0.3) 0%,
+                        rgba(0, 229, 255, 0.4) 100%);
+                color: rgba(255, 255, 255, 0.95);
+                border-color: rgba(0, 229, 255, 0.6);
+                transform: scale(1.03) translateY(-2px);
+                box-shadow:
+                    0 10px 25px rgba(0, 229, 255, 0.2),
+                    0 0 20px rgba(0, 229, 255, 0.3);
+                text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+            }
+
+            .presentation-controls {
+                background:
+                    linear-gradient(135deg,
+                        rgba(26, 35, 126, 0.15) 0%,
+                        rgba(13, 20, 33, 0.25) 100%);
+                border: 1px solid rgba(0, 229, 255, 0.2);
+                border-radius: 12px;
+                padding: 30px;
+                margin-bottom: 40px;
+                backdrop-filter: blur(15px);
+                box-shadow:
+                    0 8px 32px rgba(0, 0, 0, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            }
+
+            .controls-title {
+                font-size: 1.4rem;
+                color: rgba(0, 229, 255, 0.8);
+                margin-bottom: 20px;
+                text-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+                opacity: 0.9;
+            }
+
+            .controls-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .control-item {
+                text-align: left;
+            }
+
+            .control-label {
+                font-family: 'JetBrains Mono', monospace;
+                color: rgba(129, 199, 132, 0.7);
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+                opacity: 0.8;
+            }
+
+            .control-description {
+                color: rgba(227, 242, 253, 0.7);
+                font-size: 0.85rem;
+                opacity: 0.75;
+                font-weight: 300;
+            }
+
+            .footer {
+                margin-top: 60px;
+                padding-top: 30px;
+                border-top: 1px solid rgba(0, 229, 255, 0.15);
+                opacity: 0.8;
+            }
+
+            .github-link {
+                color: rgba(129, 199, 132, 0.6);
+                text-decoration: none;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.9rem;
+                transition: all 0.3s ease;
+            }
+
+            .github-link:hover {
+                color: rgba(0, 229, 255, 0.8);
+                text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+            }
+
+            .tech-info {
+                margin-top: 20px;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.8rem;
+                opacity: 0.5;
+                color: rgba(227, 242, 253, 0.6);
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .main-title {
+                    font-size: 2.5rem;
+                }
+
+                .slides-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .controls-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .container {
+                    padding: 20px 15px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Background particles -->
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
         </div>
-        
-        <div class="slides-grid">
-            <div class="slide-card">
-                <div class="slide-number">SLIDE 01</div>
-                <h2 class="slide-title">🔒 CLASSIFIED INTRO</h2>
-                <p class="slide-description">
-                    Dramatic opening with classified document styling. Sets the scene for the groundbreaking discovery with animated sonar effects and mission parameters.
-                </p>
-                <a href="figma_intro_slide.html" class="slide-link" target="_blank">ENTER BRIEFING →</a>
+
+        <div class="container">
+            <div class="header">
+                <h1 class="main-title">DEEP SEA DISCOVERY</h1>
+                <p class="subtitle">Interactive Presentation</p>
+                <p class="event-info">Colossal Squid: First Live Footage • March 9, 2025</p>
             </div>
-            
-            <div class="slide-card">
-                <div class="slide-number">SLIDE 02</div>
-                <h2 class="slide-title">🌊 OCEAN DESCENT</h2>
-                <p class="slide-description">
-                    Interactive journey through ocean zones with animated depth gauge. Click to explore each zone and discover where the colossal squid was found.
-                </p>
-                <a href="figma_descent_slide.html" class="slide-link" target="_blank">BEGIN DESCENT →</a>
-            </div>
-            
-            <div class="slide-card">
-                <div class="slide-number">SLIDE 03</div>
-                <h2 class="slide-title">🦑 FIRST ENCOUNTER</h2>
-                <p class="slide-description">
-                    Dramatic first contact with the massive colossal squid. Experience the awe and tension of this historic moment in deep-sea exploration.
-                </p>
-                <a href="encounter_slide.html" class="slide-link" target="_blank">WITNESS ENCOUNTER →</a>
-            </div>
-            
-            <div class="slide-card">
-                <div class="slide-number">SLIDE 04</div>
-                <h2 class="slide-title">🎥 CLASSIFIED FOOTAGE</h2>
-                <p class="slide-description">
-                    Actual recorded footage of the giant squid encounter. Witness the unprecedented 46-meter specimen in its natural habitat with real-time mission data overlays.
-                </p>
-                <a href="video_encounter_slide.html" class="slide-link" target="_blank">VIEW FOOTAGE →</a>
-            </div>
-            
-            <div class="slide-card">
-                <div class="slide-number">SLIDE 05</div>
-                <h2 class="slide-title">🔬 BIOLOGICAL ANALYSIS</h2>
-                <p class="slide-description">
-                    Scientific analysis and data collection from the encounter. Real-time specimen data, behavioral patterns, and threat assessment.
-                </p>
-                <a href="analysis_slide.html" class="slide-link" target="_blank">VIEW ANALYSIS →</a>
-            </div>
-            
-            <div class="slide-card">
-                <div class="slide-number">SLIDE 06</div>
-                <h2 class="slide-title">⚠️ EMERGENCY ASCENT</h2>
-                <p class="slide-description">
-                    Critical system failure forces immediate emergency surface ascent. Hull breach detected, oxygen running low, and the creature gives chase.
-                </p>
-                <a href="escape_slide.html" class="slide-link" target="_blank">INITIATE ESCAPE →</a>
-            </div>
-        </div>
-        
-        <div class="presentation-controls">
-            <h3 class="controls-title">📋 Presentation Instructions</h3>
-            <div class="controls-grid">
-                <div class="control-item">
-                    <div class="control-label">Full-Screen Mode</div>
-                    <div class="control-description">Press F11 on each slide for cinematic presentation</div>
+
+            <div class="slides-grid">
+                <div class="slide-card">
+                    <div class="slide-number">SLIDE 01</div>
+                    <h2 class="slide-title">🔒 CLASSIFIED INTRO</h2>
+                    <p class="slide-description">
+                        Dramatic opening with classified document styling. Sets the scene for the groundbreaking
+                        discovery with animated sonar effects and mission parameters.
+                    </p>
+                    <a href="figma_intro_slide.html" class="slide-link" target="_blank">ENTER BRIEFING →</a>
                 </div>
-                <div class="control-item">
-                    <div class="control-label">Navigation</div>
-                    <div class="control-description">Click anywhere on descent slide to advance through zones</div>
+
+                <div class="slide-card">
+                    <div class="slide-number">SLIDE 02</div>
+                    <h2 class="slide-title">🌊 OCEAN DESCENT</h2>
+                    <p class="slide-description">
+                        Interactive journey through ocean zones with animated depth gauge. Click to explore each zone
+                        and discover where the colossal squid was found.
+                    </p>
+                    <a href="figma_descent_slide.html" class="slide-link" target="_blank">BEGIN DESCENT →</a>
                 </div>
-                <div class="control-item">
-                    <div class="control-label">For Zoom</div>
-                    <div class="control-description">Share entire screen, open slides in separate tabs</div>
+
+                <div class="slide-card">
+                    <div class="slide-number">SLIDE 03</div>
+                    <h2 class="slide-title">🦑 FIRST ENCOUNTER</h2>
+                    <p class="slide-description">
+                        Dramatic first contact with the massive colossal squid. Experience the awe and tension of this
+                        historic moment in deep-sea exploration.
+                    </p>
+                    <a href="encounter_slide.html" class="slide-link" target="_blank">WITNESS ENCOUNTER →</a>
                 </div>
-                <div class="control-item">
-                    <div class="control-label">Local Server Required</div>
-                    <div class="control-description">Run: <code style="color: #00E5FF;">python3 -m http.server 8000</code> then open localhost:8000</div>
+
+                <div class="slide-card">
+                    <div class="slide-number">SLIDE 04</div>
+                    <h2 class="slide-title">🎥 CLASSIFIED FOOTAGE</h2>
+                    <p class="slide-description">
+                        Actual recorded footage of the giant squid encounter. Witness the unprecedented 46-meter
+                        specimen in its natural habitat with real-time mission data overlays.
+                    </p>
+                    <a href="video_encounter_slide.html" class="slide-link" target="_blank">VIEW FOOTAGE →</a>
+                </div>
+
+                <div class="slide-card">
+                    <div class="slide-number">SLIDE 05</div>
+                    <h2 class="slide-title">🔬 BIOLOGICAL ANALYSIS</h2>
+                    <p class="slide-description">
+                        Scientific analysis and data collection from the encounter. Real-time specimen data, behavioral
+                        patterns, and threat assessment.
+                    </p>
+                    <a href="analysis_slide.html" class="slide-link" target="_blank">VIEW ANALYSIS →</a>
+                </div>
+
+                <div class="slide-card">
+                    <div class="slide-number">SLIDE 06</div>
+                    <h2 class="slide-title">⚠️ EMERGENCY ASCENT</h2>
+                    <p class="slide-description">
+                        Critical system failure forces immediate emergency surface ascent. Hull breach detected, oxygen
+                        running low, and the creature gives chase.
+                    </p>
+                    <a href="escape_slide.html" class="slide-link" target="_blank">INITIATE ESCAPE →</a>
                 </div>
             </div>
-        </div>
-        
-        <div class="troubleshooting" style="
+
+            <div class="presentation-controls">
+                <h3 class="controls-title">📋 Presentation Instructions</h3>
+                <div class="controls-grid">
+                    <div class="control-item">
+                        <div class="control-label">Full-Screen Mode</div>
+                        <div class="control-description">Press F11 on each slide for cinematic presentation</div>
+                    </div>
+                    <div class="control-item">
+                        <div class="control-label">Navigation</div>
+                        <div class="control-description">Click anywhere on descent slide to advance through zones</div>
+                    </div>
+                    <div class="control-item">
+                        <div class="control-label">For Zoom</div>
+                        <div class="control-description">Share entire screen, open slides in separate tabs</div>
+                    </div>
+                    <div class="control-item">
+                        <div class="control-label">Local Server Required</div>
+                        <div class="control-description">Run: <code
+                                style="color: #00E5FF;">python3 -m http.server 8000</code> then open localhost:8000
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="troubleshooting" style="
             background: rgba(255, 69, 0, 0.1);
             border: 1px solid #FF4500;
             border-radius: 12px;
@@ -485,37 +588,39 @@
             margin-bottom: 30px;
             text-align: left;
         ">
-            <h3 style="color: #FF4500; margin-bottom: 15px;">⚠️ Links Not Working?</h3>
-            <p style="color: #E3F2FD; line-height: 1.6; margin-bottom: 10px;">
-                If clicking the slide links doesn't work, you need to serve the files via HTTP:
-            </p>
-            <ol style="color: #E3F2FD; line-height: 1.8; margin-left: 20px;">
-                <li><strong>Option 1:</strong> Use Python: <code style="color: #00E5FF; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">python3 -m http.server 8000</code></li>
-                <li><strong>Option 2:</strong> Use Live Server extension in VS Code</li>
-                <li><strong>Option 3:</strong> Open files individually by dragging them into browser</li>
-                <li><strong>GitHub Pages:</strong> Deploy to GitHub Pages for permanent hosting</li>
-            </ol>
+                <h3 style="color: #FF4500; margin-bottom: 15px;">⚠️ Links Not Working?</h3>
+                <p style="color: #E3F2FD; line-height: 1.6; margin-bottom: 10px;">
+                    If clicking the slide links doesn't work, you need to serve the files via HTTP:
+                </p>
+                <ol style="color: #E3F2FD; line-height: 1.8; margin-left: 20px;">
+                    <li><strong>Option 1:</strong> Use Python: <code
+                            style="color: #00E5FF; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">python3 -m http.server 8000</code>
+                    </li>
+                    <li><strong>Option 2:</strong> Use Live Server extension in VS Code</li>
+                    <li><strong>Option 3:</strong> Open files individually by dragging them into browser</li>
+                    <li><strong>GitHub Pages:</strong> Deploy to GitHub Pages for permanent hosting</li>
+                </ol>
+            </div>
+
+            <div class="footer">
+                <p>
+                    <a href="https://github.com/yourusername/deep-sea-discovery-presentation" class="github-link">
+                        📂 View on GitHub
+                    </a>
+                </p>
+                <p class="tech-info">
+                    Built with HTML5, CSS3, JavaScript • No frameworks required<br>
+                    Optimized for Chrome/Firefox • Works on any device
+                </p>
+            </div>
         </div>
-        
-        <div class="footer">
-            <p>
-                <a href="https://github.com/yourusername/deep-sea-discovery-presentation" class="github-link">
-                    📂 View on GitHub
-                </a>
-            </p>
-            <p class="tech-info">
-                Built with HTML5, CSS3, JavaScript • No frameworks required<br>
-                Optimized for Chrome/Firefox • Works on any device
-            </p>
-        </div>
-    </div>
-    
-    <script>
-        // Check if page is served via file:// protocol and show warning
-        if (window.location.protocol === 'file:') {
-            // Create warning banner
-            const warning = document.createElement('div');
-            warning.style.cssText = `
+
+        <script>
+            // Check if page is served via file:// protocol and show warning
+            if (window.location.protocol === 'file:') {
+                // Create warning banner
+                const warning = document.createElement('div');
+                warning.style.cssText = `
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -530,7 +635,7 @@
                 box-shadow: 0 4px 8px rgba(0,0,0,0.3);
                 animation: slideDown 0.5s ease-out;
             `;
-            warning.innerHTML = `
+                warning.innerHTML = `
                 <strong>⚠️ FILE PROTOCOL DETECTED</strong> - 
                 Links may not work properly. Please serve via HTTP: 
                 <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">python3 -m http.server 8000</code>
@@ -544,21 +649,22 @@
                     cursor: pointer;
                 ">✕ Close</button>
             `;
-            
-            // Add animation
-            const style = document.createElement('style');
-            style.textContent = `
+
+                // Add animation
+                const style = document.createElement('style');
+                style.textContent = `
                 @keyframes slideDown {
                     from { transform: translateY(-100%); }
                     to { transform: translateY(0); }
                 }
             `;
-            document.head.appendChild(style);
-            document.body.appendChild(warning);
-            
-            // Push content down
-            document.body.style.paddingTop = '70px';
-        }
-    </script>
-</body>
+                document.head.appendChild(style);
+                document.body.appendChild(warning);
+
+                // Push content down
+                document.body.style.paddingTop = '70px';
+            }
+        </script>
+    </body>
+
 </html>
