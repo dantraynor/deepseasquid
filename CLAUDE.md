@@ -26,13 +26,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```text
 /workspaces/deepseasquid/
-├── index.html              # Main landing page
-├── figma_intro_slide.html   # Intro slide - "DEEP" title with mission briefing
-├── figma_descent_slide.html # Descent animation through ocean layers
-├── encounter_slide.html     # First contact with the colossal squid
-├── README.md               # Project documentation
-├── LICENSE                 # Project license
-└── CLAUDE.md              # This context file
+├── index.html                # Main landing page with mysterious atmosphere
+├── figma_intro_slide.html    # Slide 01: Classified intro with mission briefing
+├── figma_descent_slide.html  # Slide 02: Ocean descent through depth zones
+├── encounter_slide.html      # Slide 03: First contact with the colossal squid
+├── video_encounter_slide.html # Slide 04: Classified footage (placeholder)
+├── analysis_slide.html       # Slide 05: Biological analysis and specimen data
+├── escape_slide.html         # Slide 06: Emergency ascent sequence
+├── README.md                 # Project documentation
+├── LICENSE                   # Project license
+└── CLAUDE.md                # This context file
 ```
 
 ## Design Patterns & Conventions
@@ -68,7 +71,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 1. **Intro Slide**: Mission briefing and classification
 2. **Descent Slide**: Journey through ocean layers with depth gauge
 3. **Encounter Slide**: First contact with massive creature
-4. **[Future slides]**: Escape, analysis, conclusions
+4. **Video Footage**: Classified recorded footage (placeholder)
+5. **Analysis Slide**: Scientific data and behavioral assessment
+6. **Escape Slide**: Emergency ascent sequence
 
 ### Data Elements
 
