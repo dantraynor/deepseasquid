@@ -1,666 +1,795 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classified Footage - Giant Squid Encounter</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400&family=Inter:wght@300;400;600&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #000000 0%, #0D1421 30%, #1A237E 60%, #0A0E27 100%);
-            height: 100vh;
-            overflow: hidden;
-            font-family: 'Inter', sans-serif;
-            position: relative;
-            color: #E3F2FD;
-        }
-        
-        /* Animated bioluminescent particles */
-        .bioluminescence {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .bio-particle {
-            position: absolute;
-            background: radial-gradient(circle, #00FF88 0%, transparent 70%);
-            border-radius: 50%;
-            opacity: 0.2;
-            animation: bioFloat 15s ease-in-out infinite;
-        }
-        
-        .bio-particle:nth-child(1) { width: 6px; height: 6px; left: 5%; animation-delay: 0s; }
-        .bio-particle:nth-child(2) { width: 8px; height: 8px; left: 15%; animation-delay: 3s; }
-        .bio-particle:nth-child(3) { width: 4px; height: 4px; left: 25%; animation-delay: 6s; }
-        .bio-particle:nth-child(4) { width: 10px; height: 10px; left: 35%; animation-delay: 1s; }
-        .bio-particle:nth-child(5) { width: 7px; height: 7px; left: 65%; animation-delay: 4s; }
-        .bio-particle:nth-child(6) { width: 5px; height: 5px; left: 75%; animation-delay: 7s; }
-        .bio-particle:nth-child(7) { width: 9px; height: 9px; left: 85%; animation-delay: 2s; }
-        .bio-particle:nth-child(8) { width: 6px; height: 6px; left: 95%; animation-delay: 5s; }
-        
-        @keyframes bioFloat {
-            0%, 100% { 
-                transform: translateY(100vh) translateX(0px) scale(0.3); 
-                opacity: 0; 
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Classified Footage - Giant Squid Encounter</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400&family=Inter:wght@300;400;600&display=swap');
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
-            10% { opacity: 0.2; }
-            50% { 
-                opacity: 0.6; 
-                transform: translateY(50vh) translateX(30px) scale(1);
+
+            body {
+                background: linear-gradient(135deg, #000000 0%, #0D1421 30%, #1A237E 60%, #0A0E27 100%);
+                height: 100vh;
+                overflow: hidden;
+                font-family: 'Inter', sans-serif;
+                position: relative;
+                color: #E3F2FD;
             }
-            90% { opacity: 0.1; }
-        }
-        
-        /* Sonar sweep effect */
-        .sonar-sweep {
-            position: absolute;
-            top: 15%;
-            right: 15%;
-            width: 200px;
-            height: 200px;
-            border: 2px solid #00E5FF;
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: sonarSweep 8s linear infinite;
-        }
-        
-        .sonar-sweep::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 2px;
-            height: 100px;
-            background: linear-gradient(to bottom, #00E5FF 0%, transparent 100%);
-            transform-origin: bottom center;
-            transform: translate(-50%, -100%) rotate(0deg);
-            animation: sonarRotate 8s linear infinite;
-        }
-        
-        @keyframes sonarSweep {
-            0%, 100% {
-                transform: scale(0.8);
+
+            /* Animated bioluminescent particles */
+            .bioluminescence {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            .bio-particle {
+                position: absolute;
+                background: radial-gradient(circle, #00FF88 0%, transparent 70%);
+                border-radius: 50%;
                 opacity: 0.2;
+                animation: bioFloat 15s ease-in-out infinite;
             }
-            50% {
-                transform: scale(1.1);
-                opacity: 0.5;
+
+            .bio-particle:nth-child(1) {
+                width: 6px;
+                height: 6px;
+                left: 5%;
+                animation-delay: 0s;
             }
-        }
-        
-        @keyframes sonarRotate {
-            0% { transform: translate(-50%, -100%) rotate(0deg); }
-            100% { transform: translate(-50%, -100%) rotate(360deg); }
-        }
-        
-        /* Main container */
-        .container {
-            position: relative;
-            z-index: 10;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-        
-        /* Classification header */
-        .classification {
-            position: absolute;
-            top: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 69, 0, 0.2);
-            color: #FF4500;
-            padding: 0.5rem 2rem;
-            border: 2px solid #FF4500;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            animation: urgentFlicker 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes urgentFlicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        /* Video container */
-        .video-container {
-            position: relative;
-            width: 80%;
-            max-width: 900px;
-            background: rgba(0, 20, 40, 0.8);
-            border: 2px solid #00E5FF;
-            border-radius: 12px;
-            padding: 20px;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 0 40px rgba(0, 229, 255, 0.3);
-        }
-        
-        .video-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(0, 229, 255, 0.3);
-        }
-        
-        .video-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            color: #00E5FF;
-            font-weight: 700;
-        }
-        
-        .timestamp {
-            font-family: 'JetBrains Mono', monospace;
-            color: #81C784;
-            font-size: 0.9rem;
-        }
-        
-        /* Video player */
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        
-        .main-video {
-            width: 100%;
-            max-height: 60vh;
-            border-radius: 8px;
-            background: #000;
-        }
-        
-        /* Data overlays */
-        .video-overlays {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            border-radius: 8px;
-        }
-        
-        .depth-gauge {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(0, 20, 40, 0.9);
-            border: 1px solid #00E5FF;
-            border-radius: 6px;
-            padding: 10px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-        }
-        
-        .depth-value {
-            color: #00E5FF;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        
-        .coordinates-overlay {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 20, 40, 0.9);
-            border: 1px solid #00E5FF;
-            border-radius: 6px;
-            padding: 10px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: #00E5FF;
-            text-align: right;
-        }
-        
-        .mission-timer {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 20, 40, 0.9);
-            border: 1px solid #FF4500;
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-family: 'JetBrains Mono', monospace;
-            color: #FF4500;
-            font-size: 0.9rem;
-            animation: missionPulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes missionPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        .threat-indicator {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 69, 0, 0.2);
-            border: 2px solid #FF4500;
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-family: 'JetBrains Mono', monospace;
-            color: #FF4500;
-            font-size: 0.8rem;
-            font-weight: bold;
-            animation: threatAlert 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes threatAlert {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.05); }
-        }
-        
-        /* Mission data grid */
-        .mission-data {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .data-card {
-            background: rgba(0, 20, 40, 0.6);
-            border: 1px solid rgba(0, 229, 255, 0.5);
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .data-card:hover {
-            background: rgba(0, 40, 80, 0.8);
-            border-color: #00E5FF;
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
-        }
-        
-        .data-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: #00E5FF;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-        
-        .data-value {
-            color: #E3F2FD;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-        
-        .critical {
-            color: #FF4500;
-            animation: criticalBlink 2s ease-in-out infinite;
-        }
-        
-        @keyframes criticalBlink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-        
-        /* Status indicators */
-        .status-panel {
-            position: absolute;
-            top: 1.5rem;
-            right: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .status-text {
-            font-family: 'JetBrains Mono', monospace;
-            color: #FF4500;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-        }
-        
-        .status-indicator {
-            width: 10px;
-            height: 10px;
-            background: #FF4500;
-            border-radius: 50%;
-            animation: recordingPulse 1s ease-in-out infinite;
-        }
-        
-        @keyframes recordingPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.2); }
-        }
-        
-        /* Warning messages */
-        .warning-panel {
-            position: absolute;
-            bottom: 2rem;
-            left: 2rem;
-            background: rgba(255, 69, 0, 0.1);
-            border: 1px solid #FF4500;
-            border-radius: 8px;
-            padding: 15px;
-            max-width: 280px;
-            font-family: 'JetBrains Mono', monospace;
-            color: #FF4500;
-            font-size: 0.8rem;
-            line-height: 1.4;
-        }
-        
-        .warning-title {
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #FF4444;
-        }
-        
-        /* Custom video controls */
-        .custom-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-top: 15px;
-            padding: 10px;
-            background: rgba(0, 20, 40, 0.6);
-            border-radius: 6px;
-            border: 1px solid rgba(0, 229, 255, 0.3);
-        }
-        
-        .control-btn {
-            background: linear-gradient(45deg, #00E5FF, #0091EA);
-            border: none;
-            color: #000;
-            padding: 8px 15px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .control-btn:hover {
-            background: linear-gradient(45deg, #40C4FF, #00E5FF);
-            transform: scale(1.05);
-        }
-        
-        .progress-container {
-            flex: 1;
-            height: 6px;
-            background: rgba(0, 229, 255, 0.2);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #00E5FF, #00FF88);
-            width: 0%;
-            transition: width 0.1s ease;
-        }
-        
-        .time-display {
-            font-family: 'JetBrains Mono', monospace;
-            color: #00E5FF;
-            font-size: 0.8rem;
-            min-width: 80px;
-        }
-        
-        /* Video fallback styling */
-        .video-fallback {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 300px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px dashed rgba(255, 69, 0, 0.5);
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .video-fallback code {
-            background: rgba(0, 229, 255, 0.1);
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .control-btn:disabled {
-            background: rgba(255, 69, 0, 0.3);
-            color: #FF4500;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .control-btn:disabled:hover {
-            background: rgba(255, 69, 0, 0.3);
-            transform: none;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .video-container { width: 95%; padding: 15px; }
-            .mission-data { grid-template-columns: repeat(2, 1fr); }
-            .video-title { font-size: 1.1rem; }
-            .classification { font-size: 0.7rem; padding: 0.3rem 1rem; }
-            .custom-controls { flex-wrap: wrap; gap: 10px; }
-        }
-        
-        @media (max-width: 480px) {
-            .mission-data { grid-template-columns: 1fr; }
-            .video-header { flex-direction: column; gap: 10px; }
-        }
-    </style>
-</head>
-<body>
-    <!-- Bioluminescent particles -->
-    <div class="bioluminescence">
-        <div class="bio-particle"></div>
-        <div class="bio-particle"></div>
-        <div class="bio-particle"></div>
-        <div class="bio-particle"></div>
-        <div class="bio-particle"></div>
-        <div class="bio-particle"></div>
-        <div class="bio-particle"></div>
-        <div class="bio-particle"></div>
-    </div>
-    
-    <!-- Sonar sweep -->
-    <div class="sonar-sweep"></div>
-    
-    <!-- Status indicators -->
-    <div class="classification">CLASSIFIED FOOTAGE - MARCH 9, 2025</div>
-    <div class="status-panel">
-        <div class="status-text">RECORDING</div>
-        <div class="status-indicator"></div>
-    </div>
-    
-    <!-- Main content -->
-    <div class="container">
-        <div class="video-container">
-            <div class="video-header">
-                <div class="video-title">FIRST CONTACT FOOTAGE</div>
-                <div class="timestamp">09:42:17 GMT • LIVE FEED</div>
-            </div>
-            
-            <div class="video-wrapper">
-                <video class="main-video" id="mainVideo" controls preload="metadata">
-                    <source src="squid_encounter.mp4" type="video/mp4">
-                    <source src="squid_encounter.webm" type="video/webm">
-                    <source src="squid_encounter.mov" type="video/quicktime">
-                    <div class="video-fallback">
-                        <h3 style="color: #FF4500; margin-bottom: 15px;">📹 VIDEO FILE REQUIRED</h3>
-                        <p style="color: #E3F2FD; line-height: 1.6;">
-                            To display your giant squid encounter footage:<br><br>
-                            1. Place your video file in the project directory<br>
-                            2. Rename it to <code style="color: #00E5FF;">squid_encounter.mp4</code><br>
-                            3. Refresh this page<br><br>
-                            Supported formats: MP4, WebM, MOV
-                        </p>
-                    </div>
-                </video>
-                
-                <!-- Data overlays -->
-                <div class="video-overlays">
-                    <div class="depth-gauge">
-                        <div>DEPTH</div>
-                        <div class="depth-value">1,968 ft</div>
-                    </div>
-                    
-                    <div class="coordinates-overlay">
-                        LAT: -59.4263°S<br>
-                        LON: -27.0434°W<br>
-                        BEARING: 127°
-                    </div>
-                    
-                    <div class="mission-timer">
-                        REC: <span id="recordingTime">00:00:00</span>
-                    </div>
-                    
-                    <div class="threat-indicator">
-                        THREAT LEVEL: HIGH
+
+            .bio-particle:nth-child(2) {
+                width: 8px;
+                height: 8px;
+                left: 15%;
+                animation-delay: 3s;
+            }
+
+            .bio-particle:nth-child(3) {
+                width: 4px;
+                height: 4px;
+                left: 25%;
+                animation-delay: 6s;
+            }
+
+            .bio-particle:nth-child(4) {
+                width: 10px;
+                height: 10px;
+                left: 35%;
+                animation-delay: 1s;
+            }
+
+            .bio-particle:nth-child(5) {
+                width: 7px;
+                height: 7px;
+                left: 65%;
+                animation-delay: 4s;
+            }
+
+            .bio-particle:nth-child(6) {
+                width: 5px;
+                height: 5px;
+                left: 75%;
+                animation-delay: 7s;
+            }
+
+            .bio-particle:nth-child(7) {
+                width: 9px;
+                height: 9px;
+                left: 85%;
+                animation-delay: 2s;
+            }
+
+            .bio-particle:nth-child(8) {
+                width: 6px;
+                height: 6px;
+                left: 95%;
+                animation-delay: 5s;
+            }
+
+            @keyframes bioFloat {
+
+                0%,
+                100% {
+                    transform: translateY(100vh) translateX(0px) scale(0.3);
+                    opacity: 0;
+                }
+
+                10% {
+                    opacity: 0.2;
+                }
+
+                50% {
+                    opacity: 0.6;
+                    transform: translateY(50vh) translateX(30px) scale(1);
+                }
+
+                90% {
+                    opacity: 0.1;
+                }
+            }
+
+            /* Sonar sweep effect */
+            .sonar-sweep {
+                position: absolute;
+                top: 15%;
+                right: 15%;
+                width: 200px;
+                height: 200px;
+                border: 2px solid #00E5FF;
+                border-radius: 50%;
+                opacity: 0.3;
+                animation: sonarSweep 8s linear infinite;
+            }
+
+            .sonar-sweep::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 2px;
+                height: 100px;
+                background: linear-gradient(to bottom, #00E5FF 0%, transparent 100%);
+                transform-origin: bottom center;
+                transform: translate(-50%, -100%) rotate(0deg);
+                animation: sonarRotate 8s linear infinite;
+            }
+
+            @keyframes sonarSweep {
+
+                0%,
+                100% {
+                    transform: scale(0.8);
+                    opacity: 0.2;
+                }
+
+                50% {
+                    transform: scale(1.1);
+                    opacity: 0.5;
+                }
+            }
+
+            @keyframes sonarRotate {
+                0% {
+                    transform: translate(-50%, -100%) rotate(0deg);
+                }
+
+                100% {
+                    transform: translate(-50%, -100%) rotate(360deg);
+                }
+            }
+
+            /* Main container */
+            .container {
+                position: relative;
+                z-index: 10;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem;
+            }
+
+            /* Classification header */
+            .classification {
+                position: absolute;
+                top: 1.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(255, 69, 0, 0.2);
+                color: #FF4500;
+                padding: 0.5rem 2rem;
+                border: 2px solid #FF4500;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+                animation: urgentFlicker 2s ease-in-out infinite alternate;
+            }
+
+            @keyframes urgentFlicker {
+
+                0%,
+                100% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0.7;
+                }
+            }
+
+            /* Video container */
+            .video-container {
+                position: relative;
+                width: 80%;
+                max-width: 900px;
+                background: rgba(0, 20, 40, 0.8);
+                border: 2px solid #00E5FF;
+                border-radius: 12px;
+                padding: 20px;
+                backdrop-filter: blur(15px);
+                box-shadow: 0 0 40px rgba(0, 229, 255, 0.3);
+            }
+
+            .video-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+            }
+
+            .video-title {
+                font-family: 'Orbitron', sans-serif;
+                font-size: 1.4rem;
+                color: #00E5FF;
+                font-weight: 700;
+            }
+
+            .timestamp {
+                font-family: 'JetBrains Mono', monospace;
+                color: #81C784;
+                font-size: 0.9rem;
+            }
+
+            /* Video player */
+            .video-wrapper {
+                position: relative;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .main-video {
+                width: 100%;
+                max-height: 60vh;
+                border-radius: 8px;
+                background: #000;
+            }
+
+            /* Data overlays */
+            .video-overlays {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                border-radius: 8px;
+            }
+
+            .depth-gauge {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                background: rgba(0, 20, 40, 0.9);
+                border: 1px solid #00E5FF;
+                border-radius: 6px;
+                padding: 10px;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.8rem;
+            }
+
+            .depth-value {
+                color: #00E5FF;
+                font-weight: bold;
+                font-size: 1.1rem;
+            }
+
+            .coordinates-overlay {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: rgba(0, 20, 40, 0.9);
+                border: 1px solid #00E5FF;
+                border-radius: 6px;
+                padding: 10px;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.8rem;
+                color: #00E5FF;
+                text-align: right;
+            }
+
+            .mission-timer {
+                position: absolute;
+                bottom: 20px;
+                left: 20px;
+                background: rgba(0, 20, 40, 0.9);
+                border: 1px solid #FF4500;
+                border-radius: 6px;
+                padding: 8px 12px;
+                font-family: 'JetBrains Mono', monospace;
+                color: #FF4500;
+                font-size: 0.9rem;
+                animation: missionPulse 2s ease-in-out infinite;
+            }
+
+            @keyframes missionPulse {
+
+                0%,
+                100% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0.7;
+                }
+            }
+
+            .threat-indicator {
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                background: rgba(255, 69, 0, 0.2);
+                border: 2px solid #FF4500;
+                border-radius: 6px;
+                padding: 8px 12px;
+                font-family: 'JetBrains Mono', monospace;
+                color: #FF4500;
+                font-size: 0.8rem;
+                font-weight: bold;
+                animation: threatAlert 1.5s ease-in-out infinite;
+            }
+
+            @keyframes threatAlert {
+
+                0%,
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+
+                50% {
+                    opacity: 0.6;
+                    transform: scale(1.05);
+                }
+            }
+
+            /* Mission data grid */
+            .mission-data {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            .data-card {
+                background: rgba(0, 20, 40, 0.6);
+                border: 1px solid rgba(0, 229, 255, 0.5);
+                border-radius: 8px;
+                padding: 12px;
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+
+            .data-card:hover {
+                background: rgba(0, 40, 80, 0.8);
+                border-color: #00E5FF;
+                box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+            }
+
+            .data-label {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.7rem;
+                color: #00E5FF;
+                text-transform: uppercase;
+                margin-bottom: 5px;
+            }
+
+            .data-value {
+                color: #E3F2FD;
+                font-weight: 600;
+                font-size: 1rem;
+            }
+
+            .critical {
+                color: #FF4500;
+                animation: criticalBlink 2s ease-in-out infinite;
+            }
+
+            @keyframes criticalBlink {
+
+                0%,
+                100% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0.6;
+                }
+            }
+
+            /* Status indicators */
+            .status-panel {
+                position: absolute;
+                top: 1.5rem;
+                right: 2rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .status-text {
+                font-family: 'JetBrains Mono', monospace;
+                color: #FF4500;
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+            }
+
+            .status-indicator {
+                width: 10px;
+                height: 10px;
+                background: #FF4500;
+                border-radius: 50%;
+                animation: recordingPulse 1s ease-in-out infinite;
+            }
+
+            @keyframes recordingPulse {
+
+                0%,
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+
+                50% {
+                    opacity: 0.4;
+                    transform: scale(1.2);
+                }
+            }
+
+            /* Warning messages */
+            .warning-panel {
+                position: absolute;
+                bottom: 2rem;
+                left: 2rem;
+                background: rgba(255, 69, 0, 0.1);
+                border: 1px solid #FF4500;
+                border-radius: 8px;
+                padding: 15px;
+                max-width: 280px;
+                font-family: 'JetBrains Mono', monospace;
+                color: #FF4500;
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+
+            .warning-title {
+                font-weight: bold;
+                margin-bottom: 8px;
+                color: #FF4444;
+            }
+
+            /* Custom video controls */
+            .custom-controls {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-top: 15px;
+                padding: 10px;
+                background: rgba(0, 20, 40, 0.6);
+                border-radius: 6px;
+                border: 1px solid rgba(0, 229, 255, 0.3);
+            }
+
+            .control-btn {
+                background: linear-gradient(45deg, #00E5FF, #0091EA);
+                border: none;
+                color: #000;
+                padding: 8px 15px;
+                border-radius: 4px;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.8rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .control-btn:hover {
+                background: linear-gradient(45deg, #40C4FF, #00E5FF);
+                transform: scale(1.05);
+            }
+
+            .progress-container {
+                flex: 1;
+                height: 6px;
+                background: rgba(0, 229, 255, 0.2);
+                border-radius: 3px;
+                overflow: hidden;
+            }
+
+            .progress-bar {
+                height: 100%;
+                background: linear-gradient(90deg, #00E5FF, #00FF88);
+                width: 0%;
+                transition: width 0.1s ease;
+            }
+
+            .time-display {
+                font-family: 'JetBrains Mono', monospace;
+                color: #00E5FF;
+                font-size: 0.8rem;
+                min-width: 80px;
+            }
+
+            /* Video fallback styling */
+            .video-fallback {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 300px;
+                background: rgba(0, 0, 0, 0.8);
+                border: 2px dashed rgba(255, 69, 0, 0.5);
+                border-radius: 8px;
+                padding: 30px;
+                text-align: center;
+            }
+
+            .video-fallback code {
+                background: rgba(0, 229, 255, 0.1);
+                padding: 2px 6px;
+                border-radius: 3px;
+                font-family: 'JetBrains Mono', monospace;
+            }
+
+            .control-btn:disabled {
+                background: rgba(255, 69, 0, 0.3);
+                color: #FF4500;
+                cursor: not-allowed;
+                transform: none;
+            }
+
+            .control-btn:disabled:hover {
+                background: rgba(255, 69, 0, 0.3);
+                transform: none;
+            }
+
+            /* Responsive design */
+            @media (max-width: 768px) {
+                .video-container {
+                    width: 95%;
+                    padding: 15px;
+                }
+
+                .mission-data {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .video-title {
+                    font-size: 1.1rem;
+                }
+
+                .classification {
+                    font-size: 0.7rem;
+                    padding: 0.3rem 1rem;
+                }
+
+                .custom-controls {
+                    flex-wrap: wrap;
+                    gap: 10px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .mission-data {
+                    grid-template-columns: 1fr;
+                }
+
+                .video-header {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Bioluminescent particles -->
+        <div class="bioluminescence">
+            <div class="bio-particle"></div>
+            <div class="bio-particle"></div>
+            <div class="bio-particle"></div>
+            <div class="bio-particle"></div>
+            <div class="bio-particle"></div>
+            <div class="bio-particle"></div>
+            <div class="bio-particle"></div>
+            <div class="bio-particle"></div>
+        </div>
+
+        <!-- Sonar sweep -->
+        <div class="sonar-sweep"></div>
+
+        <!-- Status indicators -->
+        <div class="classification">CLASSIFIED FOOTAGE - MARCH 9, 2025</div>
+        <div class="status-panel">
+            <div class="status-text">RECORDING</div>
+            <div class="status-indicator"></div>
+        </div>
+
+        <!-- Main content -->
+        <div class="container">
+            <div class="video-container">
+                <div class="video-header">
+                    <div class="video-title">FIRST CONTACT FOOTAGE</div>
+                    <div class="timestamp">09:42:17 GMT • LIVE FEED</div>
+                </div>
+
+                <div class="video-wrapper">
+                    <video class="main-video" id="mainVideo" controls preload="metadata">
+                        <source src="giantsquid.mp4" type="video/mp4">
+                        <source src="squid_encounter.webm" type="video/webm">
+                        <source src="squid_encounter.mov" type="video/quicktime">
+                        <div class="video-fallback">
+                            <h3 style="color: #FF4500; margin-bottom: 15px;">📹 VIDEO FILE REQUIRED</h3>
+                            <p style="color: #E3F2FD; line-height: 1.6;">
+                                To display your giant squid encounter footage:<br><br>
+                                1. Place your video file in the project directory<br>
+                                2. Rename it to <code style="color: #00E5FF;">squid_encounter.mp4</code><br>
+                                3. Refresh this page<br><br>
+                                Supported formats: MP4, WebM, MOV
+                            </p>
+                        </div>
+                    </video>
+
+                    <!-- Data overlays -->
+                    <div class="video-overlays">
+                        <div class="depth-gauge">
+                            <div>DEPTH</div>
+                            <div class="depth-value">1,968 ft</div>
+                        </div>
+
+                        <div class="coordinates-overlay">
+                            LAT: -59.4263°S<br>
+                            LON: -27.0434°W<br>
+                            BEARING: 127°
+                        </div>
+
+                        <div class="mission-timer">
+                            REC: <span id="recordingTime">00:00:00</span>
+                        </div>
+
+                        <div class="threat-indicator">
+                            THREAT LEVEL: HIGH
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Custom controls -->
-            <div class="custom-controls">
-                <button class="control-btn" id="playPauseBtn">▶ PLAY</button>
-                <div class="progress-container">
-                    <div class="progress-bar" id="progressBar"></div>
+
+                <!-- Custom controls -->
+                <div class="custom-controls">
+                    <button class="control-btn" id="playPauseBtn">▶ PLAY</button>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <div class="time-display" id="timeDisplay">00:00 / 00:00</div>
+                    <button class="control-btn" id="fullscreenBtn">⛶ FULLSCREEN</button>
                 </div>
-                <div class="time-display" id="timeDisplay">00:00 / 00:00</div>
-                <button class="control-btn" id="fullscreenBtn">⛶ FULLSCREEN</button>
-            </div>
-            
-            <!-- Mission data -->
-            <div class="mission-data">
-                <div class="data-card">
-                    <div class="data-label">Species</div>
-                    <div class="data-value">Mesonychoteuthis hamiltoni</div>
-                </div>
-                <div class="data-card">
-                    <div class="data-label">Size Estimate</div>
-                    <div class="data-value critical">46 meters</div>
-                </div>
-                <div class="data-card">
-                    <div class="data-label">Behavior</div>
-                    <div class="data-value critical">Aggressive</div>
-                </div>
-                <div class="data-card">
-                    <div class="data-label">Camera Status</div>
-                    <div class="data-value">OPERATIONAL</div>
+
+                <!-- Mission data -->
+                <div class="mission-data">
+                    <div class="data-card">
+                        <div class="data-label">Species</div>
+                        <div class="data-value">Mesonychoteuthis hamiltoni</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-label">Size Estimate</div>
+                        <div class="data-value critical">46 meters</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-label">Behavior</div>
+                        <div class="data-value critical">Aggressive</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-label">Camera Status</div>
+                        <div class="data-value">OPERATIONAL</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Warning panel -->
-    <div class="warning-panel">
-        <div class="warning-title">⚠ MISSION ALERT</div>
-        Subject displaying unprecedented size and intelligence.<br>
-        Maintain minimum safe distance of 100 meters.<br>
-        <strong>EVACUATION PROTOCOLS READY</strong>
-    </div>
-    
-    <script>
-        // Video controls functionality
-        const video = document.getElementById('mainVideo');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const progressBar = document.getElementById('progressBar');
-        const timeDisplay = document.getElementById('timeDisplay');
-        const fullscreenBtn = document.getElementById('fullscreenBtn');
-        const recordingTime = document.getElementById('recordingTime');
-        
-        // Play/Pause functionality
-        playPauseBtn.addEventListener('click', () => {
-            if (video.paused) {
-                video.play();
-                playPauseBtn.textContent = '⏸ PAUSE';
-            } else {
-                video.pause();
+
+        <!-- Warning panel -->
+        <div class="warning-panel">
+            <div class="warning-title">⚠ MISSION ALERT</div>
+            Subject displaying unprecedented size and intelligence.<br>
+            Maintain minimum safe distance of 100 meters.<br>
+            <strong>EVACUATION PROTOCOLS READY</strong>
+        </div>
+
+        <script>
+            // Video controls functionality
+            const video = document.getElementById('mainVideo');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const progressBar = document.getElementById('progressBar');
+            const timeDisplay = document.getElementById('timeDisplay');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const recordingTime = document.getElementById('recordingTime');
+
+            // Play/Pause functionality
+            playPauseBtn.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    playPauseBtn.textContent = '⏸ PAUSE';
+                } else {
+                    video.pause();
+                    playPauseBtn.textContent = '▶ PLAY';
+                }
+            });
+
+            // Progress bar update
+            video.addEventListener('timeupdate', () => {
+                const progress = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = progress + '%';
+
+                // Update time display
+                const currentMin = Math.floor(video.currentTime / 60);
+                const currentSec = Math.floor(video.currentTime % 60);
+                const durationMin = Math.floor(video.duration / 60);
+                const durationSec = Math.floor(video.duration % 60);
+
+                timeDisplay.textContent =
+                    `${currentMin.toString().padStart(2, '0')}:${currentSec.toString().padStart(2, '0')} / ${durationMin.toString().padStart(2, '0')}:${durationSec.toString().padStart(2, '0')}`;
+            });
+
+            // Fullscreen functionality
+            fullscreenBtn.addEventListener('click', () => {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) {
+                    video.msRequestFullscreen();
+                }
+            });
+
+            // Recording timer simulation
+            let recordingSeconds = 0;
+            setInterval(() => {
+                if (!video.paused) {
+                    recordingSeconds++;
+                    const hours = Math.floor(recordingSeconds / 3600);
+                    const minutes = Math.floor((recordingSeconds % 3600) / 60);
+                    const seconds = recordingSeconds % 60;
+                    recordingTime.textContent =
+                        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+
+            // Video ended event
+            video.addEventListener('ended', () => {
+                playPauseBtn.textContent = '▶ REPLAY';
+            });
+
+            // Video loaded event
+            video.addEventListener('loadedmetadata', () => {
+                const durationMin = Math.floor(video.duration / 60);
+                const durationSec = Math.floor(video.duration % 60);
+                timeDisplay.textContent = `00:00 / ${durationMin.toString().padStart(2, '0')}:${durationSec.toString().padStart(2, '0')}`;
+            });
+
+            // Error handling for missing video file
+            video.addEventListener('error', (e) => {
+                console.log('Video load error - this is expected if video file is not yet placed');
+                playPauseBtn.textContent = '📹 ADD VIDEO FILE';
+                playPauseBtn.disabled = true;
+                timeDisplay.textContent = 'Video file required';
+            });
+
+            // Check if video can play
+            video.addEventListener('canplay', () => {
+                playPauseBtn.disabled = false;
                 playPauseBtn.textContent = '▶ PLAY';
-            }
-        });
-        
-        // Progress bar update
-        video.addEventListener('timeupdate', () => {
-            const progress = (video.currentTime / video.duration) * 100;
-            progressBar.style.width = progress + '%';
-            
-            // Update time display
-            const currentMin = Math.floor(video.currentTime / 60);
-            const currentSec = Math.floor(video.currentTime % 60);
-            const durationMin = Math.floor(video.duration / 60);
-            const durationSec = Math.floor(video.duration % 60);
-            
-            timeDisplay.textContent = 
-                `${currentMin.toString().padStart(2, '0')}:${currentSec.toString().padStart(2, '0')} / ${durationMin.toString().padStart(2, '0')}:${durationSec.toString().padStart(2, '0')}`;
-        });
-        
-        // Fullscreen functionality
-        fullscreenBtn.addEventListener('click', () => {
-            if (video.requestFullscreen) {
-                video.requestFullscreen();
-            } else if (video.webkitRequestFullscreen) {
-                video.webkitRequestFullscreen();
-            } else if (video.msRequestFullscreen) {
-                video.msRequestFullscreen();
-            }
-        });
-        
-        // Recording timer simulation
-        let recordingSeconds = 0;
-        setInterval(() => {
-            if (!video.paused) {
-                recordingSeconds++;
-                const hours = Math.floor(recordingSeconds / 3600);
-                const minutes = Math.floor((recordingSeconds % 3600) / 60);
-                const seconds = recordingSeconds % 60;
-                recordingTime.textContent = 
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }
-        }, 1000);
-        
-        // Video ended event
-        video.addEventListener('ended', () => {
-            playPauseBtn.textContent = '▶ REPLAY';
-        });
-        
-        // Video loaded event
-        video.addEventListener('loadedmetadata', () => {
-            const durationMin = Math.floor(video.duration / 60);
-            const durationSec = Math.floor(video.duration % 60);
-            timeDisplay.textContent = `00:00 / ${durationMin.toString().padStart(2, '0')}:${durationSec.toString().padStart(2, '0')}`;
-        });
-        
-        // Error handling for missing video file
-        video.addEventListener('error', (e) => {
-            console.log('Video load error - this is expected if video file is not yet placed');
-            playPauseBtn.textContent = '📹 ADD VIDEO FILE';
-            playPauseBtn.disabled = true;
-            timeDisplay.textContent = 'Video file required';
-        });
-        
-        // Check if video can play
-        video.addEventListener('canplay', () => {
-            playPauseBtn.disabled = false;
-            playPauseBtn.textContent = '▶ PLAY';
-        });
-    </script>
-</body>
+            });
+        </script>
+    </body>
+
 </html>
