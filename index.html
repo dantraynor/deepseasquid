@@ -449,8 +449,7 @@
                     <p class="slide-description">
                         Mission briefing and classified parameters.
                     </p>
-                    <a href="figma_intro_slide.html" class="slide-link"
-                        onclick="navigateToSlide('figma_intro_slide.html'); return false;">ENTER BRIEFING →</a>
+                    <a href="figma_intro_slide.html" class="slide-link">ENTER BRIEFING →</a>
                 </div>
 
                 <div class="slide-card">
@@ -459,8 +458,7 @@
                     <p class="slide-description">
                         Interactive journey through ocean zones.
                     </p>
-                    <a href="figma_descent_slide.html" class="slide-link"
-                        onclick="navigateToSlide('figma_descent_slide.html'); return false;">BEGIN DESCENT →</a>
+                    <a href="figma_descent_slide.html" class="slide-link">BEGIN DESCENT →</a>
                 </div>
 
                 <div class="slide-card">
@@ -469,8 +467,7 @@
                     <p class="slide-description">
                         First contact with specimen.
                     </p>
-                    <a href="encounter_slide.html" class="slide-link"
-                        onclick="navigateToSlide('encounter_slide.html'); return false;">WITNESS ENCOUNTER →</a>
+                    <a href="encounter_slide.html" class="slide-link">WITNESS ENCOUNTER →</a>
                 </div>
 
                 <div class="slide-card">
@@ -479,8 +476,7 @@
                     <p class="slide-description">
                         Recorded footage of encounter.
                     </p>
-                    <a href="video_encounter_slide.html" class="slide-link"
-                        onclick="navigateToSlide('video_encounter_slide.html'); return false;">VIEW FOOTAGE →</a>
+                    <a href="video_encounter_slide.html" class="slide-link">VIEW FOOTAGE →</a>
                 </div>
 
                 <div class="slide-card">
@@ -489,8 +485,7 @@
                     <p class="slide-description">
                         Scientific analysis and threat assessment.
                     </p>
-                    <a href="analysis_slide.html" class="slide-link"
-                        onclick="navigateToSlide('analysis_slide.html'); return false;">VIEW ANALYSIS →</a>
+                    <a href="analysis_slide.html" class="slide-link">VIEW ANALYSIS →</a>
                 </div>
 
                 <div class="slide-card">
@@ -499,8 +494,7 @@
                     <p class="slide-description">
                         Hull breach protocol activated.
                     </p>
-                    <a href="escape_slide.html" class="slide-link"
-                        onclick="navigateToSlide('escape_slide.html'); return false;">INITIATE ESCAPE →</a>
+                    <a href="escape_slide.html" class="slide-link">INITIATE ESCAPE →</a>
                 </div>
             </div>
 
@@ -570,30 +564,6 @@
                     // Don't prevent default, just log
                 });
             });
-
-            // Navigation function with multiple fallback methods
-            function navigateToSlide(slideFile) {
-                console.log('navigateToSlide called with:', slideFile);
-                console.log('Current location:', window.location.href);
-                console.log('Protocol:', window.location.protocol);
-
-                try {
-                    // Method 1: Try window.location.href (most reliable)
-                    console.log('Attempting navigation with window.location.href');
-                    window.location.href = slideFile;
-                } catch (error) {
-                    console.error('Navigation failed:', error);
-
-                    // Method 2: Fallback to window.open in same window
-                    try {
-                        console.log('Fallback: Using window.open');
-                        window.open(slideFile, '_self');
-                    } catch (error2) {
-                        console.error('Fallback navigation failed:', error2);
-                        alert('Navigation failed. Please try opening the slide directly: ' + slideFile);
-                    }
-                }
-            }
         </script>
     </body>
 
