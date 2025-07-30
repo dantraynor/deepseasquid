@@ -504,67 +504,6 @@
                 </p>
             </div>
         </div>
-
-        <script>
-            // Check if page is served via file:// protocol and show warning
-            if (window.location.protocol === 'file:') {
-                // Create warning banner
-                const warning = document.createElement('div');
-                warning.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                background: linear-gradient(45deg, #FF4500, #FF6B35);
-                color: white;
-                padding: 15px;
-                text-align: center;
-                font-family: 'JetBrains Mono', monospace;
-                font-size: 14px;
-                z-index: 9999;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-                animation: slideDown 0.5s ease-out;
-            `;
-                warning.innerHTML = `
-                <strong>⚠️ FILE PROTOCOL DETECTED</strong> -
-                Links may not work properly. Please serve via HTTP:
-                <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">python3 -m http.server 8000</code>
-                <button onclick="this.parentElement.style.display='none'" style="
-                    background: rgba(255,255,255,0.2);
-                    border: none;
-                    color: white;
-                    padding: 5px 10px;
-                    margin-left: 10px;
-                    border-radius: 3px;
-                    cursor: pointer;
-                ">✕ Close</button>
-            `;
-
-                // Add animation
-                const style = document.createElement('style');
-                style.textContent = `
-                @keyframes slideDown {
-                    from { transform: translateY(-100%); }
-                    to { transform: translateY(0); }
-                }
-            `;
-                document.head.appendChild(style);
-                document.body.appendChild(warning);
-
-                // Push content down
-                document.body.style.paddingTop = '70px';
-            }
-
-            // Add click logging
-            document.querySelectorAll('.slide-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    console.log('Slide link clicked:', link.href);
-                    console.log('Protocol:', window.location.protocol);
-                    console.log('Attempting navigation to:', link.getAttribute('href'));
-                    // Don't prevent default, just log
-                });
-            });
-        </script>
     </body>
 
 </html>
