@@ -19,11 +19,13 @@ This presentation covers the historic first live footage of a colossal squid cap
 ## 🚀 Quick Start
 
 ### Option 1: Online Presentation
+
 1. Visit the [live presentation](https://yourusername.github.io/deep-sea-discovery-presentation)
 2. Click on any slide to open in full-screen
 3. Press `F11` for presentation mode
 
 ### Option 2: Local Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/deep-sea-discovery-presentation.git
@@ -44,9 +46,11 @@ python -m http.server 8000  # For local server
 If clicking the slide links doesn't work, you need to serve the files via HTTP:
 
 1. **Option 1: Use Python:**
+
    ```bash
    python3 -m http.server 8000
    ```
+
    Then open `http://localhost:8000`
 
 2. **Option 2: Use Live Server extension in VS Code**
@@ -61,7 +65,7 @@ If clicking the slide links doesn't work, you need to serve the files via HTTP:
    - Deploy to GitHub Pages for permanent hosting
    - Access via `https://yourusername.github.io/repository-name`
 
-### Common Issues:
+### Common Issues
 
 - **Animations not smooth:** Close other browser tabs, use Chrome/Firefox
 - **Responsive issues:** Test on actual device, not just browser resize
@@ -77,20 +81,23 @@ If clicking the slide links doesn't work, you need to serve the files via HTTP:
 
 ## 🎯 Presentation Instructions
 
-### For Zoom/Online Presentations:
+### For Zoom/Online Presentations
+
 1. **Screen Share** → Select "Share Screen" (entire screen)
 2. **Open slides** in separate browser tabs
 3. **Press F11** on each slide for full-screen mode
 4. **Use Alt+Tab** to switch between slides smoothly
 5. **Click on descent slide** to advance through ocean zones
 
-### Keyboard Controls:
+### Keyboard Controls
+
 - `F11` - Full-screen mode
 - `Alt+Tab` - Switch between slides
 - `Click` - Advance through ocean zones (Slide 2)
 - `Esc` - Exit full-screen
 
-### Pro Tips:
+### Pro Tips
+
 - **Test beforehand** with actual Zoom screen share
 - **Close other applications** for better performance
 - **Good internet connection** recommended for smooth animations
@@ -111,7 +118,8 @@ deep-sea-discovery-presentation/
 
 ## 🎨 Design System
 
-### Color Palette:
+### Color Palette
+
 ```css
 --deep-ocean: #0A0E27        /* Primary background */
 --midnight-blue: #1A237E     /* Secondary background */
@@ -121,20 +129,22 @@ deep-sea-discovery-presentation/
 --danger-red: #FF4444        /* Alerts/classified */
 ```
 
-### Typography:
+### Typography
+
 - **Headers:** Orbitron (Futuristic, tech feel)
 - **Body:** Inter (Clean, readable)
 - **Data/Code:** JetBrains Mono (Monospace, technical)
 
 ## 🔧 Customization
 
-### Adding New Slides:
+### Adding New Slides
+
 1. Create new HTML file using existing slides as templates
 2. Follow design system colors and fonts
 3. Update navigation links in `index.html`
 
-### Modifying Animations:
+### Modifying Animations
+
 - Animation duration: Adjust `animation-duration` in CSS
 - Easing functions: Change `ease-in-out` to `linear`, `ease`, etc.
 - Disable animations: Add `prefers-reduced-motion` media query
-
