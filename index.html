@@ -376,54 +376,6 @@
                 text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
             }
 
-            .presentation-controls {
-                background:
-                    linear-gradient(135deg,
-                        rgba(26, 35, 126, 0.15) 0%,
-                        rgba(13, 20, 33, 0.25) 100%);
-                border: 1px solid rgba(0, 229, 255, 0.2);
-                border-radius: 12px;
-                padding: 30px;
-                margin-bottom: 40px;
-                backdrop-filter: blur(15px);
-                box-shadow:
-                    0 8px 32px rgba(0, 0, 0, 0.3),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            }
-
-            .controls-title {
-                font-size: 1.4rem;
-                color: rgba(0, 229, 255, 0.8);
-                margin-bottom: 20px;
-                text-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
-                opacity: 0.9;
-            }
-
-            .controls-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 20px;
-            }
-
-            .control-item {
-                text-align: left;
-            }
-
-            .control-label {
-                font-family: 'JetBrains Mono', monospace;
-                color: rgba(129, 199, 132, 0.7);
-                font-size: 0.9rem;
-                margin-bottom: 5px;
-                opacity: 0.8;
-            }
-
-            .control-description {
-                color: rgba(227, 242, 253, 0.7);
-                font-size: 0.85rem;
-                opacity: 0.75;
-                font-weight: 300;
-            }
-
             .footer {
                 margin-top: 60px;
                 padding-top: 30px;
@@ -559,30 +511,6 @@
                     </p>
                     <a href="escape_slide.html" class="slide-link"
                         onclick="navigateToSlide('escape_slide.html'); return false;">INITIATE ESCAPE →</a>
-                </div>
-            </div>
-
-            <div class="presentation-controls">
-                <h3 class="controls-title">📋 Presentation Instructions</h3>
-                <div class="controls-grid">
-                    <div class="control-item">
-                        <div class="control-label">Full-Screen Mode</div>
-                        <div class="control-description">Press F11 on each slide for cinematic presentation</div>
-                    </div>
-                    <div class="control-item">
-                        <div class="control-label">Navigation</div>
-                        <div class="control-description">Click anywhere on descent slide to advance through zones</div>
-                    </div>
-                    <div class="control-item">
-                        <div class="control-label">For Zoom</div>
-                        <div class="control-description">Share entire screen, open slides in separate tabs</div>
-                    </div>
-                    <div class="control-item">
-                        <div class="control-label">Local Server Required</div>
-                        <div class="control-description">Run: <code
-                                style="color: #00E5FF;">python3 -m http.server 8000</code> then open localhost:8000
-                        </div>
-                    </div>
                 </div>
             </div>
 
