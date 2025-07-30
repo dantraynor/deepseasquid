@@ -5,6 +5,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Deep Sea Discovery - Research Vessels</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400&display=swap');
 
@@ -102,6 +106,7 @@
             }
 
             @keyframes float {
+
                 0%,
                 100% {
                     transform: translateY(100vh) rotate(0deg);
@@ -200,10 +205,11 @@
                 font-weight: 700;
             }
 
-            #three-canvas {
+            #map {
                 width: 80%;
                 height: 400px;
                 margin-bottom: 2rem;
+                border-radius: 8px;
             }
 
             .nav-back {
@@ -247,7 +253,7 @@
                     width: 100%;
                 }
 
-                #three-canvas {
+                #map {
                     width: 100%;
                     height: 300px;
                 }
@@ -281,98 +287,62 @@
                 </div>
                 <div class="info-box">
                     <div class="info-label">ROV Substation</div>
-                    <div class="info-value">Substation ROV - Depth Rating: 6000m, Equipped with HD Cameras and Sensors</div>
+                    <div class="info-value">Substation ROV - Depth Rating: 6000m, Equipped with HD Cameras and Sensors
+                    </div>
                 </div>
             </div>
 
-            <canvas id="three-canvas"></canvas>
+            <div id="map"></div>
         </div>
 
         <!-- Navigation -->
         <a href="index.html" class="nav-back">← BACK TO INDEX</a>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
         <script>
-            // Three.js setup
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas') });
-            renderer.setSize(window.innerWidth * 0.8, 400);
-
-            // Ocean plane
-            const oceanGeometry = new THREE.PlaneGeometry(100, 100);
-            const oceanMaterial = new THREE.MeshBasicMaterial({ color: 0x0A0E27, side: THREE.DoubleSide });
-            const ocean = new THREE.Mesh(oceanGeometry, oceanMaterial);
-            ocean.rotation.x = Math.PI / 2;
-            scene.add(ocean);
-
-            // Simple Vessel Model
-            const vesselGroup = new THREE.Group();
-            const hull = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 10, 32), new THREE.MeshBasicMaterial({ color: 0x0000FF }));
-            hull.rotation.z = Math.PI / 2;
-            const deck = new THREE.Mesh(new THREE.BoxGeometry(8, 2, 3), new THREE.MeshBasicMaterial({ color: 0xFFFFFF }));
-            deck.position.set(0, 1.5, 0);
-            vesselGroup.add(hull, deck);
-
-            // Simple ROV Model
-            const rovGroup = new THREE.Group();
-            const rovBody = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshBasicMaterial({ color: 0xFFFF00 }));
-            const rovProp = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 1, 32), new THREE.MeshBasicMaterial({ color: 0x000000 }));
-            rovProp.position.set(0, -1.5, 0);
-            rovGroup.add(rovBody, rovProp);
-            rovGroup.position.set(15, 5, 0);
-
-            scene.add(vesselGroup, rovGroup);
+            // Leaflet.js map setup
+            const map = L.map('map').setView([-55, -45], 4);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
 
             // Path for simulation
-            const curve = new THREE.CatmullRomCurve3([
-                new THREE.Vector3(-20, 0, 0),
-                new THREE.Vector3(-10, 0, 5),
-                new THREE.Vector3(0, 0, 0),
-                new THREE.Vector3(10, 0, -5),
-                new THREE.Vector3(20, 0, 0)
-            ]);
-            const pathGeometry = new THREE.TubeGeometry(curve, 64, 0.1, 8, false);
-            const pathMaterial = new THREE.MeshBasicMaterial({ color: 0x00E5FF });
-            const path = new THREE.Mesh(pathGeometry, pathMaterial);
-            scene.add(path);
+            const startCoords = [-53.16, -70.92]; // Chile
+            const endCoords = [-57.75, -26.50];   // South Sandwich Islands
+            const polyline = L.polyline([startCoords, endCoords], { color: '#00E5FF' }).addTo(map);
 
-            // Start and Drop markers
-            const startMarker = new THREE.Mesh(new THREE.SphereGeometry(0.5), new THREE.MeshBasicMaterial({ color: 0x00FF00 }));
-            startMarker.position.set(-20, 0.5, 0);
-            const dropMarker = new THREE.Mesh(new THREE.SphereGeometry(0.5), new THREE.MeshBasicMaterial({ color: 0xFF0000 }));
-            dropMarker.position.set(20, 0.5, 0);
-            scene.add(startMarker, dropMarker);
+            // Vessel marker
+            const vesselIcon = L.icon({
+                iconUrl: 'falkortoo.jpg',
+                iconSize: [50, 32],
+                iconAnchor: [25, 16]
+            });
+            const vesselMarker = L.marker(startCoords, { icon: vesselIcon }).addTo(map);
+            map.fitBounds(polyline.getBounds());
 
-            camera.position.set(0, 20, 30);
-            camera.lookAt(0, 0, 0);
+            let startTime = null;
+            const animationDuration = 10000; // 10 seconds
 
-            // Lighting
-            const light = new THREE.AmbientLight(0xFFFFFF, 0.8);
-            scene.add(light);
+            function animate(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = (timestamp - startTime) / animationDuration;
 
-            let time = 0;
-            function animate() {
-                requestAnimationFrame(animate);
-
-                // Rotate models
-                vesselGroup.rotation.y += 0.01;
-                rovGroup.rotation.y += 0.01;
-
-                // Animate vessel along path
-                time = (time + 0.001) % 1;
-                const point = curve.getPoint(time);
-                vesselGroup.position.set(point.x, 0.1, point.z);
-
-                renderer.render(scene, camera);
+                if (progress < 1) {
+                    const lat = startCoords[0] + (endCoords[0] - startCoords[0]) * progress;
+                    const lng = startCoords[1] + (endCoords[1] - startCoords[1]) * progress;
+                    vesselMarker.setLatLng([lat, lng]);
+                    requestAnimationFrame(animate);
+                } else {
+                    vesselMarker.setLatLng(endCoords);
+                }
             }
-            animate();
+
+            requestAnimationFrame(animate);
 
             // Resize handler
             window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth * 0.8, 400);
+                map.invalidateSize();
             });
         </script>
     </body>

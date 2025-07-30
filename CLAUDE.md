@@ -368,3 +368,31 @@ When working with multiple AI editors simultaneously on this codebase, follow th
 *This project creates an immersive digital experience that blends scientific authenticity with thriller elements, using modern web technologies to tell a compelling story of deep-sea discovery.*
 
 **Multi-AI Development**: This codebase supports collaborative development between Claude and Kilo Code. Please follow the coordination guidelines above to ensure smooth collaboration.
+
+## ADDENDUM: Personal Presentation Project
+
+**Important Note**: This is a personal presentation project created by Daniel Traynor for his own use. The project is designed as a single-presenter experience and does not require:
+
+- Multi-user support or user authentication
+- User input validation beyond basic presentation navigation
+- Cross-browser compatibility beyond modern browsers
+- Accessibility features beyond standard web practices
+- Performance optimization for large-scale deployment
+- User documentation or help systems
+- Error handling for user-generated content
+
+**Development Focus Should Be On**:
+- Visual impact and presentation aesthetics
+- Smooth animations and transitions
+- Reliable playback of the presentation sequence
+- Professional appearance suitable for demonstration
+- Functionality that works reliably in the presenter's environment
+
+**Avoid Over-Engineering**:
+- Do not implement user management systems
+- Do not add unnecessary configuration options
+- Do not create complex error handling for edge cases
+- Do not build features for "other users" or public deployment
+- Keep solutions simple and focused on the presentation goal
+
+This clarification helps maintain development focus on what actually matters for a personal presentation tool rather than building for hypothetical users or use cases.
