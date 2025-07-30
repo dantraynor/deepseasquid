@@ -37,6 +37,37 @@ open index.html
 python -m http.server 8000  # For local server
 ```
 
+## ⚠️ Troubleshooting
+
+### Links Not Working?
+
+If clicking the slide links doesn't work, you need to serve the files via HTTP:
+
+1. **Option 1: Use Python:**
+   ```bash
+   python3 -m http.server 8000
+   ```
+   Then open `http://localhost:8000`
+
+2. **Option 2: Use Live Server extension in VS Code**
+   - Install "Live Server" extension
+   - Right-click `index.html` → "Open with Live Server"
+
+3. **Option 3: Open files individually**
+   - Drag HTML files directly into browser window
+   - Navigate manually between slides
+
+4. **Option 4: GitHub Pages**
+   - Deploy to GitHub Pages for permanent hosting
+   - Access via `https://yourusername.github.io/repository-name`
+
+### Common Issues:
+
+- **Animations not smooth:** Close other browser tabs, use Chrome/Firefox
+- **Responsive issues:** Test on actual device, not just browser resize
+- **Font loading:** Ensure internet connection for Google Fonts
+- **File protocol warning:** Use local server instead of opening files directly
+
 ## 📱 Slides Overview
 
 | Slide | Title | Description | Features |

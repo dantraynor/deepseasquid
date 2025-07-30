@@ -502,7 +502,8 @@
                         Dramatic opening with classified document styling. Sets the scene for the groundbreaking
                         discovery with animated sonar effects and mission parameters.
                     </p>
-                    <a href="figma_intro_slide.html" class="slide-link" onclick="navigateToSlide('figma_intro_slide.html'); return false;">ENTER BRIEFING →</a>
+                    <a href="figma_intro_slide.html" class="slide-link"
+                        onclick="navigateToSlide('figma_intro_slide.html'); return false;">ENTER BRIEFING →</a>
                 </div>
 
                 <div class="slide-card">
@@ -512,7 +513,8 @@
                         Interactive journey through ocean zones with animated depth gauge. Click to explore each zone
                         and discover where the colossal squid was found.
                     </p>
-                    <a href="figma_descent_slide.html" class="slide-link" onclick="navigateToSlide('figma_descent_slide.html'); return false;">BEGIN DESCENT →</a>
+                    <a href="figma_descent_slide.html" class="slide-link"
+                        onclick="navigateToSlide('figma_descent_slide.html'); return false;">BEGIN DESCENT →</a>
                 </div>
 
                 <div class="slide-card">
@@ -522,7 +524,8 @@
                         Dramatic first contact with the massive colossal squid. Experience the awe and tension of this
                         historic moment in deep-sea exploration.
                     </p>
-                    <a href="encounter_slide.html" class="slide-link" onclick="navigateToSlide('encounter_slide.html'); return false;">WITNESS ENCOUNTER →</a>
+                    <a href="encounter_slide.html" class="slide-link"
+                        onclick="navigateToSlide('encounter_slide.html'); return false;">WITNESS ENCOUNTER →</a>
                 </div>
 
                 <div class="slide-card">
@@ -532,7 +535,8 @@
                         Actual recorded footage of the giant squid encounter. Witness the unprecedented 46-meter
                         specimen in its natural habitat with real-time mission data overlays.
                     </p>
-                    <a href="video_encounter_slide.html" class="slide-link" onclick="navigateToSlide('video_encounter_slide.html'); return false;">VIEW FOOTAGE →</a>
+                    <a href="video_encounter_slide.html" class="slide-link"
+                        onclick="navigateToSlide('video_encounter_slide.html'); return false;">VIEW FOOTAGE →</a>
                 </div>
 
                 <div class="slide-card">
@@ -542,7 +546,8 @@
                         Scientific analysis and data collection from the encounter. Real-time specimen data, behavioral
                         patterns, and threat assessment.
                     </p>
-                    <a href="analysis_slide.html" class="slide-link" onclick="navigateToSlide('analysis_slide.html'); return false;">VIEW ANALYSIS →</a>
+                    <a href="analysis_slide.html" class="slide-link"
+                        onclick="navigateToSlide('analysis_slide.html'); return false;">VIEW ANALYSIS →</a>
                 </div>
 
                 <div class="slide-card">
@@ -552,7 +557,8 @@
                         Critical system failure forces immediate emergency surface ascent. Hull breach detected, oxygen
                         running low, and the creature gives chase.
                     </p>
-                    <a href="escape_slide.html" class="slide-link" onclick="navigateToSlide('escape_slide.html'); return false;">INITIATE ESCAPE →</a>
+                    <a href="escape_slide.html" class="slide-link"
+                        onclick="navigateToSlide('escape_slide.html'); return false;">INITIATE ESCAPE →</a>
                 </div>
             </div>
 
@@ -578,28 +584,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="troubleshooting" style="
-            background: rgba(255, 69, 0, 0.1);
-            border: 1px solid #FF4500;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            text-align: left;
-        ">
-                <h3 style="color: #FF4500; margin-bottom: 15px;">⚠️ Links Not Working?</h3>
-                <p style="color: #E3F2FD; line-height: 1.6; margin-bottom: 10px;">
-                    If clicking the slide links doesn't work, you need to serve the files via HTTP:
-                </p>
-                <ol style="color: #E3F2FD; line-height: 1.8; margin-left: 20px;">
-                    <li><strong>Option 1:</strong> Use Python: <code
-                            style="color: #00E5FF; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">python3 -m http.server 8000</code>
-                    </li>
-                    <li><strong>Option 2:</strong> Use Live Server extension in VS Code</li>
-                    <li><strong>Option 3:</strong> Open files individually by dragging them into browser</li>
-                    <li><strong>GitHub Pages:</strong> Deploy to GitHub Pages for permanent hosting</li>
-                </ol>
             </div>
 
             <div class="footer">
@@ -680,14 +664,14 @@
                 console.log('navigateToSlide called with:', slideFile);
                 console.log('Current location:', window.location.href);
                 console.log('Protocol:', window.location.protocol);
-                
+
                 try {
                     // Method 1: Try window.location.href (most reliable)
                     console.log('Attempting navigation with window.location.href');
                     window.location.href = slideFile;
                 } catch (error) {
                     console.error('Navigation failed:', error);
-                    
+
                     // Method 2: Fallback to window.open in same window
                     try {
                         console.log('Fallback: Using window.open');
