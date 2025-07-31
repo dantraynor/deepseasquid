@@ -18,13 +18,6 @@ This presentation covers the historic first live footage of a colossal squid cap
 
 1. Visit the [live presentation](https://yourusername.github.io/deep-sea-discovery-presentation)
 
-## ⚠️ Troubleshooting
-
-### Common Issues
-
-- **Animations not smooth:** Close other browser tabs, use Chrome/Firefox
-- **Responsive issues:** Test on actual device, not just browser resize
-
 ## 📱 Slides Overview
 
 | Slide | Title | Description | Features |
